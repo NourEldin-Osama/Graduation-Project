@@ -21,11 +21,13 @@ def home(request):
 
 
 def signup(request):
-    return None
+    context = {"title": "Sign Up"}
+    return render(request, 'core/signup.html', context)
 
 
 def login(request):
-    return None
+    context = {"title": "Login"}
+    return render(request, 'core/login.html', context)
 
 
 @login_required
@@ -36,7 +38,8 @@ def logout(request):
 
 @login_required
 def profile(request):
-    return None
+    context = {"title": "Profile"}
+    return render(request, 'core/profile.html', context)
 
 
 @login_required

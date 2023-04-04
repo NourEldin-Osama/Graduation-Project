@@ -3,7 +3,10 @@
         {% if message.tags == "success" %}
             <success class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert"
                      data-filter-title="{{ message.tags }}">
-                {{ message }}
+                <i class="bi bi-check-circle-fill me-2 flex-shrink-0"></i>
+                <div>
+                    {{ message }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=""></button>
             </success>
         {% endif %}

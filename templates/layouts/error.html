@@ -2,8 +2,11 @@
     {% for message in messages %}
         {% if message.tags == "error" %}
             <error class="alert alert-danger alert-dismissible fade show d-flex justify-content-center" role="alert"
-                     data-filter-title="{{ message.tags }}">
-                {{ message }}
+                   data-filter-title="{{ message.tags }}">
+                <i class="bi bi-exclamation-triangle-fill me-2 flex-shrink-0"></i>
+                <div>
+                    {{ message }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=""></button>
             </error>
         {% endif %}

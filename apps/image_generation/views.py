@@ -17,8 +17,7 @@ def image_generation(request):
 @api_view(['POST'])
 def image_generation_api(request):
     # text_prompt = request.POST.get('text_prompt', '')  # form-encoded data
-    data = json.loads(request.body.decode("utf-8"))  # JSON-Encoded data
-    text_prompt = data.get('text_prompt', '')
+    text_prompt = request.data.get('text_prompt', '')  # json-encoded data
     image_base64 = generate_image(text_prompt, 25)
-    print(f"{text_prompt = }")
+    print(f"{text_prompt = }")  # log to console
     return Response({'image_base64': image_base64}, status=200)

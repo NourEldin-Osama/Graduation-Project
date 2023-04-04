@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'apps.core.apps.CoreConfig',
-    'apps.text_simplification.apps.TextSimplificationConfig',
-    'apps.image_generation.apps.ImageGenerationConfig',
+    'apps.core',
+    'apps.text_simplification',
+    'apps.image_generation',
+    'apps.video_generation',
 
     # The following apps are required:
     'django.contrib.sites', 'allauth', 'allauth.account', 'allauth.socialaccount',

@@ -3,7 +3,7 @@
 <header class="navbar navbar-expand-xl bg-navbar sticky-top rounded-bottom bg-body-tertiary px-4">
     <nav class="container-fluid flex-wrap flex-xl-nowrap">
         <a class="navbar-brand active Algerian-font fs-4" href="{% url "home" %}">
-            <img class="d-inline-block align-text-middle rounded-circle" src="{% static 'logo.png' %}" alt="logo"
+            <img class="d-inline-block align-text-middle rounded-circle" src="{% static 'images/logo.png' %}" alt="logo"
                  style="width: 45px; height: 50px;">
             MEMORIZERS
         </a>
@@ -13,7 +13,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="Navbar" data-bs-scroll="true">
+        <div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="Navbar"
+             data-bs-scroll="true" data-bs-backdrop="false">
             <div class="offcanvas-header px-4 pb-0">
                 <h4 class="offcanvas-title Algerian-font">
                     MEMORIZERS
@@ -23,21 +24,21 @@
 
             <div class="offcanvas-body p-4 pt-0 p-xl-0">
                 <hr class="d-xl-none opacity-50">
-                <ul class="navbar-nav flex-row flex-wrap Times-New-Roman-font align-items-center">
+                <ul class="navbar-nav flex-row flex-wrap align-items-center">
                     <li class="nav-item col-6 col-xl-auto">
-                        <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "home" %}"
-                           href="{% url "home" %}">
+                        <a class="nav-link py-2 px-0 px-xl-2"
+                           href="{% url "home" %}#Home">
                             <i class='fas fa-home icon-style'></i> Home
                         </a>
                     </li>
                     <li class="nav-item col-6 col-xl-auto">
-                        <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "home" %}"
+                        <a class="nav-link py-2 px-0 px-xl-2"
                            href="{% url "home" %}#About">
                             <i class='fa-solid fa-circle-info icon-style'></i> About
                         </a>
                     </li>
                     <li class="nav-item col-6 col-xl-auto">
-                        <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "home" %}"
+                        <a class="nav-link py-2 px-0 px-xl-2"
                            href="{% url "home" %}#Contacts">
                             <i class='fa fa-comment icon-style'></i> Contacts
                         </a>
@@ -55,9 +56,9 @@
                         </a>
                     </li>
                     <li class="nav-item col-6 col-xl-auto">
-                        <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "home" %}"
-                           href="{% url "home" %}">
-                            <i class='fa fa-video icon-style'></i> Video Generation
+                        <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "video_generation" %}"
+                           href="{% url "video_generation" %}">
+                            <i class='fa fa-video icon-style'></i> Video Conversion
                         </a>
                     </li>
                 </ul>

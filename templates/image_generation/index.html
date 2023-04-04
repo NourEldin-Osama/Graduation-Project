@@ -4,14 +4,13 @@
     <div class="container-fluid mb-3">
         <div class="container-fluid mb-3">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-9 form-floating">
+                <div class="col-9 offset-1 form-floating">
                     <input type="text" id="text-prompt" name="text-prompt"
                            class="form-control" placeholder="Enter your text:" autofocus>
                     <label for="text-prompt" class="ps-4">Input text</label>
                 </div>
-                <div class="col-1 d-flex align-items-center justify-content-center p-1">
-                    <button type="button" id="button" class="btn btn-lg btn-outline-primary w-100">Generate</button>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <button type="button" id="button" class="btn btn-outline-primary h-100">Generate</button>
                 </div>
                 <div class="col-1 align-items-center" id="loading" style="display: none">
                     <div class="spinner-border"></div>
@@ -19,13 +18,38 @@
             </div>
         </div>
         <div class="container-fluid d-flex align-items-center justify-content-center">
-            <img id="generated-image" src="" alt="" width="512" height="512" style="display: none">
+            <div id="output" class="position-relative" style="display: none">
+                <img id="generated-image" src="" alt="" width="488" height="488">
+                <div class="position-absolute top-0 end-0 p-2">
+                    <a id="download" class="btn btn-outline-success" href="" download="output"
+                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download">
+                        <i class="bi bi-download"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         let $button = $("#button");
         let $loading = $("#loading");
+        const $download = $("#download");
+
+        {# Enable Tooltip #}
+        const $tooltip = new bootstrap.Tooltip('[data-bs-toggle="tooltip"]', {
+            trigger: 'hover'
+        });
+
+        {# download the image when the icon is clicked #}
+        $download.click(function (e) {
+            let image_src = $('#generated-image').attr('src');
+            $(this).attr('href', image_src);
+            $tooltip.setContent({'.tooltip-inner': 'Downloading!'})
+        });
+
+        $download.on('hidden.bs.tooltip', () => {
+            $tooltip.setContent({'.tooltip-inner': 'Download'});
+        })
 
         function loading(isLoading) {
             if (isLoading) {
@@ -41,7 +65,7 @@
         }
 
         function show_image() {
-            $("#generated-image").show();
+            $("#output").show();
         }
 
         $button.click(function (e) {
@@ -50,9 +74,9 @@
                 type: "POST",
                 url: '{% url "image_generation_api" %}',
                 contentType: 'application/json; charset=utf-8',
+                headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
                 data: JSON.stringify({
                     'text_prompt': $("#text-prompt").val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
                 }),
                 success: function (result) {
                     $("#generated-image").attr('src', result['image_base64']);
@@ -61,7 +85,7 @@
                 error: function (result) {
                     alert('error');
                 },
-                complete: function() {
+                complete: function () {
                     // this block will be executed after success or error block
                     loading(false);
                 }
