@@ -10,17 +10,24 @@
             </div>
             <div class="col-5">
                 <label for="simplified-text" class="form-label h4 d-flex justify-content-center">Simplified Text</label>
-                <textarea class="form-control" rows="8" id="simplified-text" readonly></textarea>
+                <div class="position-relative">
+                    <textarea class="form-control" rows="8" id="simplified-text" readonly></textarea>
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <button type="button" id="copy-to-clipboard" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copy to clipboard">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container-fluid p-4">
         <div class="row">
-            <div class="col-5"></div>
-            <div class="col-2">
+            <div class="col-2 offset-5">
                 <div class="text-center">
-                    <button type="button" id="button" class="btn btn-lg btn-outline-primary"> Simplify </button>
+                    <button type="button" id="button" class="btn btn-lg btn-outline-primary"> Simplify</button>
                 </div>
             </div>
             <div class="col-1 p-0">
@@ -34,8 +41,25 @@
     </div>
 
     <script>
-        let $button = $("#button");
-        let $loading = $("#loading");
+        const $button = $("#button");
+        const $loading = $("#loading");
+        const $copy_to_clipboard = $("#copy-to-clipboard");
+
+        {# Enable Tooltip #}
+        const $tooltip = new bootstrap.Tooltip('[data-bs-toggle="tooltip"]', {
+            trigger: 'hover'
+        });
+
+        {# Copy to clipboard when the icon is clicked #}
+        $copy_to_clipboard.click(function (e) {
+            let $text = $("#simplified-text").val();
+            navigator.clipboard.writeText($text);
+            $tooltip.setContent({'.tooltip-inner': 'Copied!'})
+        });
+
+        $copy_to_clipboard.on('hidden.bs.tooltip', () => {
+            $tooltip.setContent({'.tooltip-inner': 'Copy to clipboard'});
+        })
 
         function loading(isLoading) {
             if (isLoading) {
@@ -55,10 +79,11 @@
             $.ajax({
                 type: "POST",
                 url: '{% url "text_simplification_api" %}',
+                dataType: "json",
                 contentType: 'application/json; charset=utf-8',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 data: JSON.stringify({
                     'input_text': $("#text-to-simplify").val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
                 }),
                 success: function (result) {
                     $("#simplified-text").text(result['simplified_text']);
@@ -66,7 +91,7 @@
                 error: function (result) {
                     alert('error');
                 },
-                complete: function() {
+                complete: function () {
                     // this block will be executed after success or error block
                     loading(false);
                 }

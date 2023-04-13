@@ -5,12 +5,12 @@ from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import make_password, check_password
-from django.conf import settings as s
+from django.conf import settings as django_settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 # Create your views here.
-print(f"LOCAL_IP: {s.LOCAL_IP}")
+print(f"LOCAL_IP: {django_settings.LOCAL_IP}")
 DEFAULT_THEME = 'Light'
 AVAILABLE_THEMES = ["Light", "Dark"]
 

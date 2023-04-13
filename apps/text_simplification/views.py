@@ -1,10 +1,9 @@
-import json
-
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .utils import simplify_text
+
 
 # Create your views here.
 
@@ -17,9 +16,8 @@ def text_simplification(request):
 @api_view(['POST'])
 def text_simplification_api(request):
     # original_text = request.POST.get('input_text', '')  # form-encoded data
-    data = json.loads(request.body.decode("utf-8"))  # JSON-Encoded data
-    original_text = data.get('input_text', '')
-    simplified_text = simplify_text(original_text)
+    original_text = request.data.get('input_text', '')  # json-encoded data
+    simplified_text = simplify_text(original_text, model='ours')
     print(f"{original_text = }")
     print(f"{simplified_text = }")
     return Response({'original_text': original_text, 'simplified_text': simplified_text}, status=200)

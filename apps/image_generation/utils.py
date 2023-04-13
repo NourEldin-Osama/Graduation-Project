@@ -1,8 +1,8 @@
 import requests
 import json
 
-url = ""
 # url = input("Please enter image generation server link: ")
+url = ""
 
 
 def generate_image(text_prompt: str, steps: int):

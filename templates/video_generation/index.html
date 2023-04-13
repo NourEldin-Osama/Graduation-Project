@@ -1,0 +1,174 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+    <h1 class="text-center mb-4">Video Conversion</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <label class="form-label h4 d-flex justify-content-center">
+                    Upload Your Video
+                </label>
+                <div class="position-relative">
+                    <div class="form-control" style="height: 320px">
+                        <video id="uploaded-video" class="w-100" controls style="display: none; height: 300px">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                        <input type="file" id="upload-video-input-element" accept="video/*"
+                               onchange="show_uploaded_video()" hidden/>
+                        <label id="upload-btn" class="btn btn-outline-secondary" for="upload-video-input-element"
+                               data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upload">
+                            <i class="bi bi-upload"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <label class="form-label h4 d-flex justify-content-center">
+                    Converted Video
+                </label>
+                <div class="position-relative">
+                    <div class="form-control" style="height: 320px">
+                        <video id="generated-video" class="w-100" controls style="display: none; height: 300px">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <button type="button" id="download" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download">
+                            <i class="bi bi-download"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid p-4">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button type="button" id="character-button" class="btn btn-lg btn-outline-primary"
+                        data-bs-toggle="modal" data-bs-target="#CharacterModal">
+                    Choose Character
+                </button>
+            </div>
+            <div class="col-auto">
+                <button type="button" id="button" class="btn btn-lg btn-outline-primary">Convert</button>
+            </div>
+            <div class="">
+                <div class="container h-100 d-flex align-items-center">
+                    <div id="loading" style="display: none">
+                        <div class="spinner-border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="CharacterModal" tabindex="-1">
+        {% comment %}Vertically centered scrollable modal{% endcomment %}
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="CharacterModalLabel">Choose Character</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {% for character, name in characters.items %}
+                        <input type="radio" class="btn-check" name="Character" autocomplete="off"
+                               id="character_{{ forloop.counter }}" value="character_{{ forloop.counter }}">
+                        <label class="btn btn-outline-primary" for="character_{{ forloop.counter }}">
+                            <div class="text-center text-capitalize">{{ name }}</div>
+                            <img src="{% static character %}" class="img-fluid" alt="{{ name }}">
+                        </label>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" id="character-selected-button" class="btn btn-outline-info"
+                            data-bs-dismiss="modal">Ok
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const $button = $("#button");
+        const $video = $("#uploaded-video");
+        const $generated_video = $("#generated-video");
+        let $character;
+
+        function show_uploaded_video() {
+            const reader = new FileReader();
+            // get video file from input element
+            const file = $("#upload-video-input-element")[0].files[0];
+            reader.onload = function () {
+                // read video file as base64 string and set it as source of video element
+                let base64String = reader.result;
+                $video.attr('src', base64String);
+                $video.show();
+                $('#upload-btn').hide();
+            };
+            if (file) {
+                // read video file as base64 string
+                reader.readAsDataURL(file);
+            }
+        }
+
+        $button.click(function () {
+            let base64String = $video.attr('src');
+            if (base64String && $character) {
+                // send video file as string base 64 and character as string in json data to server using ajax
+                $.ajax({
+                    type: "POST",
+                    url: '{% url "video_generation_api" %}',
+                    contentType: 'application/json; charset=utf-8',
+                    // send csrf token in request header. csrf token is required for ajax post request
+                    headers: {"X-CSRFToken": "{{ csrf_token }}"},
+                    data: JSON.stringify({
+                        video: base64String,
+                        character: $character,
+                    }),
+                    success: function (result) {
+                        // show success alert if request is successful
+                        show_alert("success", "Video converted successfully!");
+
+                        // set generated video as source of video element
+                        $generated_video.attr('src', result["generated_video"]);
+                        $generated_video.show();
+
+                        {% comment %}
+                        // show download button
+                        $("#download").show();
+                        // set generated video as source of download button
+                        $("#download").attr('href', result.video);
+                        // hide loading spinner
+                        $("#loading").hide();
+                        {% endcomment %}
+                    },
+                    error: function () {
+                        // show error alert if error occurs
+                        show_alert("error", "Error");
+                    },
+                    complete: function () {
+                        // this block will be executed after success or error block
+                    }
+                });
+            }
+            if (!base64String) {
+                // show warning alert if no video is uploaded
+                show_alert("warning", "Please upload a video!");
+            }
+            if (!$character) {
+                // show warning alert if no character is selected
+                show_alert("warning", "Please select a character!");
+            }
+        });
+        // get selected character from radio button on change
+        $("input[name='Character']").change(function () {
+            $character = $("input[name='Character']:checked").val();
+        });
+    </script>
+{% endblock content %}

@@ -1,10 +1,9 @@
-import json
-
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .utils import generate_image
+
 
 # Create your views here.
 
@@ -20,4 +19,4 @@ def image_generation_api(request):
     text_prompt = request.data.get('text_prompt', '')  # json-encoded data
     image_base64 = generate_image(text_prompt, 25)
     print(f"{text_prompt = }")  # log to console
-    return Response({'image_base64': image_base64}, status=200)
+    return Response({'text_prompt': text_prompt, 'image_base64': image_base64}, status=200)
