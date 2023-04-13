@@ -1,0 +1,176 @@
+<h3 class="text-left text-capitalize mb-1" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Account Management
+</h3>
+
+<div class="form-control mt-3 px-5 py-3" style="box-shadow: 0 0 10px red;" id="settings">
+
+    <button type="button"
+            class="btn btn-outline-success Account-Management-btn d-flex flex-column justify-content-between mb-3 mt-2"
+            style="font-size: 20px"
+            data-bs-toggle="modal" data-bs-target="#merge">
+        <div class="d-flex justify-content-between">
+            <img class="me-2 p-0" style="height: 28px;"
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFAUlEQVR4nO2cbWhbVRjHz8A3UBFW2+R57nXLSraMibZbGUxYP42OsbHVhVbm8NPmC6hUW3Cs86Vs03b6TfCLgqKggo6h4GdB/dBO5zvDD8IYtDkniVnbtJXVmm6R53oT79I0y73n1qS5zw8OtHm5Ofn1ued/zslthGAYZhlUOPyUAnhyufuZCiQQH1IAf0mAvyVAZ6XHMiWkm5vDCiChEPPUJGJy3DSN0scxZbi4ZcttCmC0IK/YAEbpvnLPYRwoxLeXyCtUIsD7zscy5UJjGXmOSuRQqRQaNxPIoVJFaNxUIofKf+Q7Om5ViN9UK89RiWO/R6O3i6CjKoRGFRKDHSqqmtDgUNELDQ4VH0KDQ8WH0OBQ8SE0Ah8qyo/QCGqoJHwKjUCGStrn0AhUqORXKDQCEypqBUMj8KHixK2cG57MCBaoC1egJixQExaoCQvUhAVqwgI1YYGasEBNWKAmLFATFqgJC9SEBWrCAjVhgZqwQE1YoCYsUBMWqAkL1IQFasICNaArCNwK5H+6cSAB7nUrcNw01zqPEWhSpvmAW4HJUOj+Wve7blCG0eP62pdwOF7rftcNCvGMh4uHhmvd77pBIl7wcOXV+Vr3uy6QAOsk4jWXAnP0nAnDMEXQUYgvuqo8xOvpWGzMrsJBEWQur19/hwRQrtJ3w4ZL2T17hqzfARINcRWqVyRAn9uxL9Pefi4/PHyARNq3PS2CSDIUalEAU24Fzh061JcfGdk/3dX1ml2FV2giLoKGRDznVl4qErlM8gottXHjD/ZY+IkIEhLgOQ/zvvyVHTvecQqcP3LkCWkYf1pjI+IzIggkEPdLxJxrgaY5u3j8eK9TILXsrl3WJFwiLjb86kQCdCuAeS/Vl9m+/YNSeYWW2bbtY3s8vEp/INGop62kKvEgT5nm1OKxY48sJ9CS2Nb2hV2JOQnwrGgUUi0tIS+BccPYt3PnW5XkLanEf4PlLCW9WOWT5D4FMK0jj1o6FhuluV81EmlMLAQLTZOoGlfVZFsCrKPlmdsVRrkmAbIKYKZcAldq80ePPp7atOn74rEApAQ4kUC8T9QLtKU+bpprJwzjQXs/74xE/M7DxkA5cdaa10psgIP0M20gZPfte7laidZke/fu044VCx3zmgT4ViGOUJ9pI5fegy8fD+i+aeVzkwCnHX0bsW43jKtzvb39biTSqZ/du/eV9ObNXyvEBb/6V98CAd7NC7Gm0Df6mb4jxrrPNGfm4vEBVxLtlhsc7CGZmY6OT9Ox2PlkJDJO80uq7kYS+FleiFtK+0e3KcTPC5VIIrxI1G11KVACFCrvvXLynBKLlYiYs4KlynRubIGI12nMc562FSSuoTHRDhaa4owtDAw8GliBkqYqhtEjXJJAPKAAJq3jmObsJE22/4dqrCuBEuBLmjcKjyRDoYhE/KpwvFQ0enG2u/tEwwuUAEoCHBY+YJ3S4fBj9E0dRZGtrb9Nd3W9mj916uGGEigR/6AVQaap6W7hM1OtrfcoxJcUYqb4mqaZpU0Gqsrc0FB89QoE+IV2Y5Kh0J1ihUk3N98lAZ6XAL+W9GMhFY3+nNm69exkZ+ebM/H4C7Qhu9Dffzh38uTBuhIoaTkH8KNCfH3CMNpEjUggtkuANxTAT34sMZ1tyYt5qKoFSkGJeMm+suBDOoVo7ZpAbBJ1Bn3wRH2zT/OPqM/UdyvJ6b3oCmQYUQv+AeKS055PLD7PAAAAAElFTkSuQmCC">
+            Merge account
+        </div>
+    </button>
+
+    <button type="button"
+            class="btn btn-outline-success Account-Management-btn d-flex flex-column justify-content-between mb-3"
+            style="font-size: 20px"
+            data-bs-toggle="modal" data-bs-target="#deactivate">
+        <div class="d-flex justify-content-between">
+            <img class="me-2 p-0" style="height: 28px;"
+                 src="data:image/png;base64,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">
+            Deactivate account
+        </div>
+    </button>
+
+
+    <button type="button"
+            class="btn btn-outline-success Account-Management-btn d-flex flex-column justify-content-between mb-2"
+            style="font-size: 20px"
+            data-bs-toggle="modal" data-bs-target="#delete">
+        <div class="d-flex justify-content-between">
+            <img class="me-2 p-0" style="height: 28px;"
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEMklEQVR4nO2bTYhcRRDHK+LXJTnMmuz8681uJIRENgTEQBBRSMxFFD8O8bJ6EA8iCB7CmuSkIMiOSsSLHoSAIGxiDh4EIQiSVQmEgCASUBdEIq/qrdmAIauHCGGkZ2uyEzW7Pfu68/qN/qBhdqip16+6ut6/u98S3QTOTUzcrsxvCqDK3FmxAaLMbfcbGhaUub3qjf+ztWlY0KVR7eTMD6xmK8CDvUygYUFtVGPZJ48OSwAEeFKYZ4X59zXM6ajN9UmAUznz4ykVsk5F7Y3gI69LhemKAAfPj40xJYbrkwCHXB9dX4sseyyYc2Ge7aYZcIgSpxuEpb5+Ec4p86JzemF8HJQ4v27c2LSacDmYU2X+Wpm/opqQ7FOkFgE4N4hur0sbZH2h9XrchV9f6AC6vS4MtL7QIS0g3vel/weA/+MZgKUa4OYNDQkCPDRIDWgnUK1jtWlfHdDuZcJQtDL7jB2idVQzcuZt3WnM/FNpZ8J8VoAzVM85fzrYSnBhZGQ91YQiy5629P+ktDMFfjRluJ1qggAv25PsvWCbIUWW7aWa4LbELANeDeFsxqI5STVBgaNWA14o7UyAIxbNKaoJAnxm0/aJ0s6Uecoy4AjVBGX+pjttW63dpZ0JMGkZMEM1QYHcBm28tLMiy/aYqJilGuCEmwB/uj7Pbd16R2mHOfN2KyhznjJ62klPYS7c1tq/yc/Qdv0IcJf19zcKwcLIyHrLgMU1LqTase36KUZHd5jd9xQKMTV4sdHYsKKdbaS67bTeNpT7LrZdPznzPrM7RaFQYM5HDfZG6UZ/x7K77jfN5rPBi7Z4qsEkArD82H6HQqHLavCZ1AMgwNvBzzHFUw0mEQDmj7rZyvwchUI91WAKAVDmz7t2zeYjFArpqUHgWOoBEOA7K9j3UiiKLNvrowaTCADzBWfjjskpFLmnGqw6AB2iW4X5qmvuM4ViwdSgMv+RcgDcazKWqfMUGvFQg1UHQID7LFO/pdCoqUEB7kk1AJplj5rNSQqNeKjBqgOQMz9vg/QhhUaBY6upwf5zxZXO40Lb9RDgsNm/VfJ216YGb7B8nY5t12f/rtkcoNCoxyLjunPFFc7jQttd6yNwPNoOtniqwSrpq1MPB3deLKvBLylRFPjB1gETwZ3nA+wNVoUAl1wff2m1GsGdX2w0Nviowar4efPmO22ArkQ70hfPvcEqKEZH77YBOh/tIuqhBqtiPsvutxp1tp5VtiQCPGVT4FOKhXqowapQ5hdtCnwQ7SJiarBgfoUSQ5lfs8F5PeZFplZTg1UhwPs2OC/FvMikzbPjlBjufaBu37Jsf7SLFK3W7t6jprNr122UCN01w/Jb7tuiXahDdMs1uck8kzOPUcW4dwAE+DjaTtDfcdvNif7j5OJ8q7WTbgbzmzZtEeBET3tXeuPAJZcBTgmu5Wb+Aka4d8oqDO9sAAAAAElFTkSuQmCC">
+            Delete account
+        </div>
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="merge" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5"
+                    style="-webkit-text-stroke: 1px #e61a1a; color: black;font-size: 10px" id="merge">
+                    <i class="" style="color: white"></i>Merge account</h1>
+                <button type="button" data-bs-dismiss="modal"
+                        style="background-color: transparent;border: 0">
+                    <i class="bi bi-x-lg" style="color: #e61a1a;"></i>
+                </button>
+            </div>
+            <div class="modal-body pe-0"
+                 style="font-family:Times New Roman;font-size: 18px">
+                <div class="row justify-content-center">
+                    <div class="col-9">
+                        <div class="row justify-content-center mb-4" style="margin-top: -10px;">
+                            <div class="col-lg-20">
+                                <div class="form-floating mt-3">
+                                    <input type="text" class="form-control" style="height: 45px"
+                                           placeholder="Password" id="password" name="password" autofocus required></input>
+                                    <label for="password" style="font-size: 18px;top:-7px; left:-7px;">Password</label>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <input class="form-control" style="height: 45px" placeholder="primary email"
+                                           id="primary_email" name="primary_email" autofocus required></input>
+                                    <label for="primary_email" style="font-size: 18px;top:-7px; left:-7px;">Primary Email
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <input class="form-control" style="height: 45px" placeholder="secondary email"
+                                           id="secondary_email" name="secondary_email" autofocus required></input>
+                                    <label for="secondary_email" style="font-size: 18px;top:-7px; left:-7px;">Secondary Email
+                                    </label>
+                                </div>
+                                <br>
+
+                                <div class="text-center">
+                                    <button type="button" id="button"
+                                            class="btn btn-lg btn-outline-primary rounded-4" style="font-size: 18px">
+                                        Merge
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deactivate" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5"
+                    style="-webkit-text-stroke: 1px #e61a1a; color: black;font-size: 10px"
+                    id="deativate">
+                    <i class="" style="color: white"></i>Deactivate account</h1>
+                <button type="button" data-bs-dismiss="modal"
+                        style="background-color: transparent;border: 0">
+                    <i class="bi bi-x-lg" style="color: #e61a1a;"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                        <pre style="font-family:Times New Roman;font-size: 18px">
+<b>Are you sure you want to deactivate your account ?</b>
+                        </pre>
+                <div class="container-fluid p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-auto px-1">
+                            <button type="button" class="btn btn-lg btn-outline rounded-4"
+                                    style="--bs-btn-color: #2500BC ; border-color: #2500BC; --bs-btn-hover-color: #fff; --bs-btn-hover-bg:#2500BC; font-size: 18px;">
+                                Deactivate now
+                            </button>
+                        </div>
+                        <div class="col-auto px-1">
+                            <button type="button" class="btn btn-lg btn-outline rounded-4"
+                                    style="--bs-btn-color: #71D456; border-color: #71D456; --bs-btn-hover-color: #fff; --bs-btn-hover-bg:#71D456; font-size: 18px">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5"
+                    style="-webkit-text-stroke: 1px #e61a1a; color: black;font-size: 10px" id="delete">
+                    <i class="" style="color: white"></i>Delete account</h1>
+                <button type="button" data-bs-dismiss="modal"
+                        style="background-color: transparent;border: 0">
+                    <i class="bi bi-x-lg" style="color: #e61a1a;"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                        <pre style="font-family:Times New Roman;font-size: 18px">
+<b>Are you sure you want to delete your account ?</b>
+                        </pre>
+                <div class="container-fluid p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-auto px-1">
+                            <button type="button" class="btn btn-lg btn-outline rounded-4"
+                                        style="--bs-btn-color: #e61a1a ; border-color:#e61a1a; --bs-btn-hover-color: #fff; --bs-btn-hover-bg:#e61a1a; font-size: 18px">
+                                    Yes, delete my account
+                                </button>
+                        </div>
+                        <div class="col-auto px-1">
+                            <button type="button" class="btn btn-lg btn-outline rounded-4"
+                                        style="--bs-btn-color: #71D456; border-color: #71D456; --bs-btn-hover-color: #fff; --bs-btn-hover-bg:#71D456; font-size: 18px">
+                                    Cancel
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

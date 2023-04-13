@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h3 class="text-center mb-4 pt-4 ms-5 ps-5">Get a quick peek at Memorizers' jaw-dropping
+                    presentations!</h3>
+            </div>
+            <div class="col me-2 mb-4 pt-4">
+                <div class="text-end">
+                    <button type="button" id="button" class="btn btn-lg btn-outline-primary rounded-4"
+                            data-bs-toggle="modal" data-bs-target="#add">
+                        Add your work
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-left">
+            <div class="col-5 ms-2">
+                <label for="medical-field" class="form-label h3 d-flex justify-content-left"
+                       style="-webkit-text-stroke: 1px #e61a1a; color: black;">Education field</label>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="add" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"
+                        style="-webkit-text-stroke: 1px #e61a1a; color: black;font-size: 10px" id="add">
+                        <i class="" style="color: white"></i>Add your work</h1>
+                    <button type="button" data-bs-dismiss="modal"
+                            style="background-color: transparent;border: 0">
+                        <i class="bi bi-x-lg" style="color: #e61a1a;"></i>
+                    </button>
+                </div>
+                <div class="modal-body pe-0"
+                     style="font-family:Times New Roman;font-size: 18px">
+                    <div class="row justify-content-center">
+                        <div class="col-9">
+                            <div class="row justify-content-center mb-4" style="margin-top: -10px;">
+                                <div class="col-lg-20">
+                                    <div class="form-floating mt-3">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle"
+                                                    style="width: 355.8px; font-size: 18px; background-color: #e61a1a;border-color: transparent" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                Choose a field
+                                            </button>
+                                            <ul class="dropdown-menu" style="width: 355.8px; font-size: 16px;">
+                                                <li><a class="dropdown-item" href="#">Education</a></li>
+                                                <li><a class="dropdown-item" href="#">Healthcare</a></li>
+                                                <li><a class="dropdown-item" href="#">Business</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input class="form-control" style="height: 45px" placeholder="add"
+                                               id="add" name="add" autofocus required></input>
+                                        <label for="add" style="font-size: 16px;top:-7px; left:-7px;">Add A New Field
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <div class="text-center">
+                                        <button type="button" id="button"
+                                                class="btn btn-lg btn-outline-primary rounded-4"
+                                                style="font-size: 16px">
+                                            Upload
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}

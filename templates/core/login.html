@@ -1,4 +1,157 @@
 {% extends 'layouts/base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css"
+          integrity="sha512-sopmFEmRVsWt542K+yzH3FQ1KJfdosOJG+bGLs9ZJT07b/3gUxRA9ICuJg2JtoZ9WeknAUuwJ0ggnmrV1YL6kQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+{% endblock head %}
 {% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="form-control mt-3" style="height: 540px; box-shadow: 0 0 10px red;" id="signup">
+                    <h1 class="text-center mb-6 pt-6" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Please
+                        Login</h1>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-9">
+                            <div class="row justify-content-center mb-4" style="margin-top: -10px;">
+                                <div class="col-lg-20">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" style="height: 45px"
+                                               placeholder="Email address or username"
+                                               id="email" name="email" autofocus required></input>
+                                        <label for="email" style="font-size: 16px;top:-7px; left:-7px;">Email address or
+                                            username</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-floating">
+                                        <input class="form-control" style="height: 45px" placeholder="Password"
+                                               id="password" name="password" autofocus required></input>
+                                        <label for="email" style="font-size: 16px;top:-7px; left:-7px;">Password</label>
+                                        <div class="text-end">
+                                            <a href="#" class="text-center" style="color: #3379E1;">Forgot password?</a>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" style="border-color: #e61a1a" type="checkbox" value=""
+                                                   id="exampleCheckbox">
+                                            <label class="form-check-label" for="exampleCheckbox">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-2">
+                                                <button type="button" id="button"
+                                                        class="btn btn-lg btn-outline-primary rounded-4">
+                                                    Login
+                                                </button>
+                                            </div>
+                                            <div class="row my-2">
+                                                <div class="col d-inline-flex justify-content-end align-items-center">
+                                                    <hr class="opacity-50" style="width: 150px">
+                                                </div>
+                                                <div class="col-3 text-center mx-2">
+
+                                                    <label class="" style="font-size: 18px"
+                                                           for="exampleCheckbox">
+                                                        <b>Or login with</b>
+                                                    </label>
+                                                </div>
+                                                <div class="col d-inline-flex justify-content-start align-items-center">
+                                                    <hr class="opacity-50" style="width: 150px">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="d-flex justify-content-center">
+                                                <button class="btn btn-light rounded-5 p-0"
+                                                        style="color: #e61a1a; background-color: #fab4b44d; width:60px; height: 40px">
+                                                    <i class="bi bi-camera" style="font-size:30px"></i>
+                                                </button>
+                                            </div>
+
+                                            {% load socialaccount %}
+                                            <div class="row mb-3 text-center justify-content-between">
+                                                <div class="col-lg-4 zero-padding">
+                                                    {% comment %}<form action="{% provider_login_url 'google' %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-reddit col-lg-12"
+                                                            type="submit">
+                                            <span class="style-element fa-brands fa-google fa_with_bg"
+                                                  style="background-color: white" color=""></span>Google
+                                                    </button>
+                                                    </form>
+                                                    {% comment %}<form action="{% provider_login_url "twitter" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-twitter col-lg-12"
+                                                            type="submit">
+                                                        <span class="style-element fa-brands fa-twitter"
+                                                              style="color: #55ACEE"></span>Twitter
+                                                    </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-lg-4 zero-padding">
+                                                    {% comment %} <form action="{% provider_login_url "facebook" method="oauth2" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-facebook col-lg-12"
+                                                            type="submit">
+                                                        <span class="style-element fa-brands fa-facebook-f"
+                                                              style="color: #3B5998"></span>Facebook
+                                                    </button>
+                                                    </form>
+                                                    {% comment %}<form action="{% provider_login_url "microsoft" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-microsoft col-lg-12"
+                                                            type="submit">
+                                                        <span class="style-element fa-brands"><img  style="height: 30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAeklEQVR4nO3UMQqAMBBE0QUL7+F5LOxyxlSewTvZj/10Q8AI/gfbBpb8pAoAPklt08j4eft5aGSKBRo3IBJK8IgNv1CKhAwJpUjIkFCKhGYnBPzd0m+NjJ+na9XIFAt0bkAklOARG36hFAkZEkqRkCGhFAnNTggA6g0PsZwml5fu+o4AAAAASUVORK5CYII="></span>
+                                                        Microsoft
+                                                    </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-lg-4 zero-padding">
+                                                    {% comment %}<form action="{% provider_login_url "github" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-github col-lg-12"
+                                                            type="submit">
+                                                        <span class="style-element fa-brands fa-github"
+                                                              style="color: #444444"></span>Github
+                                                    </button>
+                                                    </form>
+                                                    {% comment %}<form action="{% provider_login_url "github" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}{% endcomment %}
+                                                    <button class="btn btn-block btn-social btn btn-linkedin col-lg-12"
+                                                            type="submit">
+                                                        <span class="style-element fa-brands fa-linkedin"
+                                                              style="color: #007BB6"></span>LinkedIn
+                                                    </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <label class="form-check-label" for="exampleCheckbox">
+                                                Looking to
+                                                <a href="{% url "signup" %}" class="text-center"
+                                                   style="color: #3379E1;">
+                                                    create an account
+                                                </a>
+                                                ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

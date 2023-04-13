@@ -1,34 +1,38 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
-    <h1 class="text-center mb-3">Image Generation</h1>
-    <div class="container-fluid mb-3">
-        <div class="container-fluid mb-3">
-            <div class="row">
-                <div class="col-9 offset-1 form-floating">
-                    <input type="text" id="text-prompt" name="text-prompt"
-                           class="form-control" placeholder="Enter your text:" autofocus>
-                    <label for="text-prompt" class="ps-4">Input text</label>
-                </div>
-                <div class="col-1 d-flex align-items-center justify-content-center">
-                    <button type="button" id="button" class="btn btn-outline-primary h-100">Generate</button>
-                </div>
-                <div class="col-1 align-items-center" id="loading" style="display: none">
-                    <div class="spinner-border"></div>
-                </div>
+    <h1 class="text-center mb-4 pt-4" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Image Generation</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <label for="text-to-image" class="form-label h4 d-flex justify-content-center">The Input Text</label>
+                <textarea class="form-control" placeholder="Enter your text:" rows="13"
+                          id="text-to-image" name="text-to-image" autofocus required></textarea>
+            </div>
+            <div class="col-5">
+                <label for="generated-image" class="form-label h4 d-flex justify-content-center">The Generated Image</label>
+                <textarea class="form-control" rows="13" id="generated-image" readonly></textarea>
             </div>
         </div>
-        <div class="container-fluid d-flex align-items-center justify-content-center">
-            <div id="output" class="position-relative" style="display: none">
-                <img id="generated-image" src="" alt="" width="488" height="488">
-                <div class="position-absolute top-0 end-0 p-2">
-                    <a id="download" class="btn btn-outline-success" href="" download="output"
-                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download">
-                        <i class="bi bi-download"></i>
-                    </a>
+    </div>
+
+    <div class="container-fluid p-4">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2">
+                <div class="text-center">
+                    <button type="button" id="button" class="btn btn-lg btn-outline-primary rounded-4"> Generate </button>
+                </div>
+            </div>
+            <div class="col-1 p-0">
+                <div class="container h-100 d-flex align-items-center">
+                    <div id="loading" style="display: none">
+                        <div class="spinner-border"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         let $button = $("#button");

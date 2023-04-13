@@ -1,0 +1,156 @@
+<h3 class="text-left mb-1" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Personal Information
+</h3>
+<div class="form-control mt-3 px-5 py-3" style="box-shadow: 0 0 10px red;" id="settings">
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" style="height: 45px"
+                       placeholder="First Name"
+                       id="first_name" name="first_name" autofocus required></input>
+                <label for="first_name" style="font-size: 16px;top:-7px; left:-7px;">First
+                    Name</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input class="form-control" style="height: 45px" placeholder="Last Name"
+                       id="last_name" name="last_name" autofocus required></input>
+                <label for="last_name" style="font-size: 16px;top:-7px; left:-7px;">Last
+                    Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" style="height: 45px" placeholder="Username"
+                       id="username" name="username" autofocus required></input>
+                <label for="username"
+                       style="font-size: 16px;top:-7px; left:-7px;">Username</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" style="height: 45px"
+                       placeholder="Email address or username"
+                       id="email" name="email" autofocus required></input>
+                <label for="email" style="font-size: 16px;top:-7px; left:-7px;">Email
+                    address</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating">
+                <input class="form-control" style="height: 45px"
+                       placeholder="Phone Number"
+                       id="phone_number" name="phone_number" autofocus required></input>
+                <label for="phone_number" style="font-size: 16px;top:-7px; left:-7px;">Phone
+                    Number</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" style="height: 45px" placeholder="Old Password"
+                       id="old_password" name="old_password" autofocus required></input>
+                <label for="old_password"
+                       style="font-size: 16px;top:-7px; left:-7px;">Old Password</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" style="height: 45px" placeholder="New Password"
+                       id="new_password" name="new_password" autofocus required></input>
+                <label for="new_password"
+                       style="font-size: 16px;top:-7px; left:-7px;">New Password</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" style="height: 45px"
+                       placeholder="Confirm New Password"
+                       id="confirm_new_password" name="confirm_new_password" autofocus
+                       required></input>
+                <label for="confirm_new_password"
+                       style="font-size: 16px;top:-7px; left:-7px;">Confirm New
+                    Password</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <div class="input-group">
+                    <label class="me-3 d-flex justify-content-center align-items-center">Country</label>
+                    <select class="form-select form-select-md"
+                            aria-label=".form-select-lg example" id="country"
+                            name="country"
+                            form="form"
+                            style="border-color: #e61a1a">
+                        <option value="Egypt" selected>Egypt</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <div class="input-group">
+                    <label class="me-3 d-flex justify-content-center align-items-center">City</label>
+                    <select class="form-select form-select-md"
+                            aria-label=".form-select-lg example" id="city"
+                            name="city"
+                            form="form"
+                            style="border-color: #e61a1a">
+                        <option value="Cairo" selected>Cairo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <div class="input-group">
+                <label class="me-3 d-flex justify-content-center align-items-center">Birthdate: </label>
+                <input type="date" name="birthdate" class="vDateField"
+                       style="border-color: #e61a1a" size="10"
+                       id="birthdate"
+                       placeholder="Birthdate" autocomplete="bday" required>
+                <div class="input-group-text">
+                    <label class="fas fa-calendar" style="color: #e61a1a"></label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col d-flex align-items-center">
+                <div class="align-self-center">
+                    <label>Gender: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="Male"
+                               value="M">
+                        <label class="form-check-label" for="Male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender"
+                               id="Female"
+                               value="F">
+                        <label class="form-check-label" for="Female">Female</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <div class="text-center">
+                    <button type="button" class="btn btn-lg btn-outline-success rounded-4"
+                            style="--bs-btn-color: #71D456; border-color: #71D456; --bs-btn-hover-color: #fff; --bs-btn-hover-bg:#71D456">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
