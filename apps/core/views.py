@@ -39,12 +39,28 @@ def logout(request):
 @login_required
 def profile(request):
     context = {"title": "Profile"}
-    return render(request, 'core/profile.html', context)
+    return render(request, 'core/get.inspired.html', context)
 
 
-@login_required
-def settings(request):
-    return None
+# @login_required
+def settings(request, template):
+    context = {"title": "Settings"}
+    root = "core/settings/"
+    if template == "personal_information":
+        context['template'] = root + "personal_information.html"
+    elif template == "login_management":
+        context['template'] = root + "login_management.html"
+    elif template == "account_management":
+        context['template'] = root + "account_management.html"
+    elif template == "design_and_mode":
+        context['template'] = root + "design_mode.html"
+    elif template == "privacy_policy":
+        context['template'] = root + "privacy_policy.html"
+    elif template == "language":
+        context['template'] = root + "language.html"
+    else:
+        context['template'] = root + "personal_information.html"
+    return render(request, 'core/settings/settings.html', context)
 
 
 @api_view(['POST'])
@@ -67,3 +83,8 @@ def set_theme(request):
         theme_value = DEFAULT_THEME
     response.set_cookie(key='Theme', value=theme_value, max_age=datetime.timedelta(days=365))
     return response
+
+
+def get_inspired(request):
+    context = {"title": "Get Inspired"}
+    return render(request, 'core/get.inspired.html', context)

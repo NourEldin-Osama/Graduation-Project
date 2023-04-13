@@ -1,0 +1,62 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row pt-5">
+            <div class="col-3 me-5 ps-0">
+                <div class="form-control rounded-5 rounded-start-0 border-start-0"
+                     style="box-shadow: 0 0 10px red; background-color: #e61a1a;height: 474px;" id="settings">
+                    <h1 class="form-label d-flex justify-content-center" style="margin-top: 20px;color: white"><b>Settings</b>
+                    </h1>
+                    <div class="d-flex flex-column justify-content-between h-75 mt-4 ps-4 h3">
+                        <a class="settings-list btn btn-success" href="{% url "settings" "personal_information" %}">
+                            <div class="d-flex justify-content-between">
+                                Personal information
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                        <a class="settings-list btn btn-success" href="{% url "settings" "login_management" %}">
+                            <div class="d-flex justify-content-between">
+                                Login management
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                        <a class="settings-list btn btn-success" href="{% url "settings" "account_management" %}">
+                            <div class="d-flex justify-content-between">
+                                Account management
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                        <a class="settings-list btn btn-success" href="{% url "settings" "design_and_mode" %}">
+                            <div class="d-flex justify-content-between">
+                                Design mode
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                        <a class="settings-list btn btn-success" href="{% url "settings" "privacy_policy" %}">
+                            <div class="d-flex justify-content-between">
+                                Privacy policy
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                        <a class="settings-list btn btn-success" href="{% url "settings" "language" %}">
+                            <div class="d-flex justify-content-between">
+                                Language
+                                <div><i class="bi bi-arrow-right-square-fill"></i></div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-7 ms-5">
+                <div class="row align-items-center h-100">
+                    <div class="col">
+                        {% include template %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+

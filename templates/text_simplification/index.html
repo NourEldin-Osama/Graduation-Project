@@ -1,17 +1,17 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
-    <h1 class="text-center mb-4">Text Simplification</h1>
+    <h1 class="text-center mb-4 pt-4" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Text Simplification</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-5">
-                <label for="text-to-simplify" class="form-label h4 d-flex justify-content-center">Input Text</label>
-                <textarea class="form-control" placeholder="Enter your text:" rows="8"
+                <label for="text-to-simplify" class="form-label h4 d-flex justify-content-center">The Input Text</label>
+                <textarea class="form-control" placeholder="Enter your text:" rows="13"
                           id="text-to-simplify" name="text-to-simplify" autofocus required></textarea>
             </div>
             <div class="col-5">
-                <label for="simplified-text" class="form-label h4 d-flex justify-content-center">Simplified Text</label>
+                <label for="simplified-text" class="form-label h4 d-flex justify-content-center">The Simplified Text</label>
                 <div class="position-relative">
-                    <textarea class="form-control" rows="8" id="simplified-text" readonly></textarea>
+                    <textarea class="form-control" rows="13" id="simplified-text" readonly></textarea>
                     <div class="position-absolute top-0 end-0 p-2">
                         <button type="button" id="copy-to-clipboard" class="btn btn-outline-secondary"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copy to clipboard">
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-2 offset-5">
                 <div class="text-center">
-                    <button type="button" id="button" class="btn btn-lg btn-outline-primary"> Simplify</button>
+                    <button type="button" id="button" class="btn btn-lg btn-outline-primary rounded-4"> Simplify</button>
                 </div>
             </div>
             <div class="col-1 p-0">

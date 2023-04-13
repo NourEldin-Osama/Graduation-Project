@@ -39,8 +39,50 @@
         <div class="container-fluid p-0" id="Home">
             <img src="{% static 'images/Home.png' %}" class="img-fluid" alt="image">
             <div class="row justify-content-center m-0 position-relative" style="bottom: 100px">
-                <div class="col-6">
-                    <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="true">
+                <div class="col-12">
+<style>
+    .cards-style {
+        background-color: #e61a1a;
+        transition: all 0.3s ease-in-out;
+        --bs-border-color: #fde8e8;
+    }
+
+    .cards-style:hover {
+        box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.8);
+        transform: translateY(-5px);
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-4">
+            <div class="card cards-style border border-5">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-white text-capitalize">IMAGE</h1>
+                    <p class="text-white text-center">Make an image of your text</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card cards-style border border-5">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-white text-capitalize">TEXT</h1>
+                    <p class="text-white text-center">Simplify your text by another text</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card cards-style border border-5">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-white text-capitalize">VIDEO</h1>
+                    <p class="text-white text-center">Exchange your video by a video with another character</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                  {% comment %}  <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="true">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
                                     class="active"></button>
@@ -83,7 +125,8 @@
                                 data-bs-slide="next">
                             <span class="carousel-control-next-icon"></span>
                         </button>
-                    </div>
+                    </div>{% endcomment %}
+
                 </div>
             </div>
         </div>
@@ -99,10 +142,10 @@
                 </div>
             </div>
             <div class="row justify-content-center m-0 py-5">
-                <div class="col-5">
-                    <div class="text-center">
-                        We are a team of five people working to develop the best products <br>
-                        to help our customers build their presentations effectively. <br>
+                <div class="col-8">
+                    <div class="text-center h4">
+                        We are a team of five people working to develop the best products
+                        to help our customers build their presentations effectively.
                         Our goal at a buffer has always been to do things a little differently.<br>
                         Since our beginnings, we have strived to create the most unique systems possible.
                     </div>

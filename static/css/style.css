@@ -6,6 +6,7 @@
 .Algerian-font {
     font-family: Algerian, Times, serif;
 }
+
 /* end fonts */
 
 textarea {
@@ -14,4 +15,120 @@ textarea {
 
 .active > .bi {
     display: block !important; /* for add ✔ to theme dropdown-menu nav */
+}
+
+.bg-body-tertiary {
+    --bs-tertiary-bg-rgb: 230, 26, 26;
+}
+
+.navbar-brand {
+    color: rgb(255 255 255);
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav {
+    --bs-navbar-hover-color: rgb(255 255 255);
+}
+
+.navbar-nav {
+    --bs-nav-link-hover-color: rgb(255 255 255);
+}
+
+.navbar-nav .nav-link.active {
+    color: rgb(255 255 255);
+}
+
+.nav-link {
+    color: rgb(255 255 255 / 65%);
+}
+
+footer {
+    color: white
+}
+
+.form-control {
+    border-color: #e61a1a;
+}
+
+.form-control:focus {
+    border-color: #e61a1a;
+    box-shadow: 0 0 0 0.25rem rgb(230 26 26 / 25%);
+}
+
+#button:hover {
+    background-color: #e61a1a;
+    border-color: #e61a1a;
+    color: white;
+    box-shadow: 0 0 10px 2px #e61a1a;
+    transform: translateY(-5px);
+}
+
+#button {
+    border-color: #e61a1a;
+    color: black;
+    transition: all 0.3s ease-in-out;
+}
+
+.style-element {
+    background-color: white;
+}
+
+.btn-social {
+    margin-top: 1rem !important;
+    text-align: center;
+    font-size: 18px;
+}
+
+#button {
+    border-radius: var(--bs-border-radius-xl) !important;
+}
+
+input::file-selector-button {
+    background-color: #fab4b44d;
+    color: #e61a1a;
+    border-color: #e61a1a;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #e61a1a;
+}
+
+.settings-list {
+    color: white;
+    border-color: transparent;
+    background-color: transparent;
+    font-size: x-large;
+    text-align: left;
+    --bs-btn-hover-bg: #fab4b44d;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-bg: #ff8a8a4d;
+    --bs-btn-active-border-color: #ffffff;
+}
+
+.Account-Management-btn {
+    --bs-btn-color: black;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: #ff8a8a4d;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: black;
+    --bs-btn-active-bg: #ff8a8a4d;
+    --bs-btn-active-border-color: #ffffff;
+}
+
+.Design-radio {
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-padding-y: 0.375rem;
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+    font-size: 20px;
+}
+
+.fa-google {
+    background: conic-gradient(from -63deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }

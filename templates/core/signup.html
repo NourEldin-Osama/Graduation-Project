@@ -1,3 +1,244 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="form-control mt-3" style="height: 540px; box-shadow: 0 0 10px red;" id="signup">
+                    <h1 class="text-center mb-6 pt-6" style="-webkit-text-stroke: 1px #e61a1a; color: black;">Please
+                        Signup</h1>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-9">
+                            <div class="row justify-content-center mb-4" style="margin-top: -10px;">
+                                <div class="col-lg-20">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" style="height: 45px"
+                                                       placeholder="First Name"
+                                                       id="first_name" name="first_name" autofocus required></input>
+                                                <label for="first_name" style="font-size: 16px;top:-7px; left:-7px;">First
+                                                    Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input class="form-control" style="height: 45px" placeholder="Last Name"
+                                                       id="last_name" name="last_name" autofocus required></input>
+                                                <label for="last_name" style="font-size: 16px;top:-7px; left:-7px;">Last
+                                                    Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" style="height: 45px" placeholder="Username"
+                                                       id="username" name="username" autofocus required></input>
+                                                <label for="username"
+                                                       style="font-size: 16px;top:-7px; left:-7px;">Username</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" style="height: 45px"
+                                                       placeholder="Email address or username"
+                                                       id="email" name="email" autofocus required></input>
+                                                <label for="email" style="font-size: 16px;top:-7px; left:-7px;">Email
+                                                    address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" style="height: 45px" placeholder="Password"
+                                                       id="password" name="password" autofocus required></input>
+                                                <label for="password"
+                                                       style="font-size: 16px;top:-7px; left:-7px;">Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" style="height: 45px"
+                                                       placeholder="Confirm Password"
+                                                       id="confirm_password" name="confirm_password" autofocus
+                                                       required></input>
+                                                <label for="confirm_password"
+                                                       style="font-size: 16px;top:-7px; left:-7px;">Confirm
+                                                    Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input class="form-control" style="height: 45px"
+                                                       placeholder="Phone Number"
+                                                       id="phone_number" name="phone_number" autofocus required></input>
+                                                <label for="phone_number" style="font-size: 16px;top:-7px; left:-7px;">Phone
+                                                    Number</label>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex align-items-center">
+                                            <div class="align-self-center">
+                                                <label>Gender: </label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" id="Male"
+                                                           value="M">
+                                                    <label class="form-check-label" for="Male">Male</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                           id="Female"
+                                                           value="F">
+                                                    <label class="form-check-label" for="Female">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <div class="input-group">
+                                                    <label class="me-3 d-flex justify-content-center align-items-center">Country</label>
+                                                    <select class="form-select form-select-md"
+                                                            aria-label=".form-select-lg example" id="country"
+                                                            name="country"
+                                                            form="form"
+                                                            style="border-color: #e61a1a">
+                                                        <option value="Egypt" selected>Egypt</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <div class="input-group">
+                                                    <label class="me-3 d-flex justify-content-center align-items-center">City</label>
+                                                    <select class="form-select form-select-md"
+                                                            aria-label=".form-select-lg example" id="city"
+                                                            name="city"
+                                                            form="form"
+                                                            style="border-color: #e61a1a">
+                                                        <option value="Cairo" selected>Cairo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="me-3 d-flex justify-content-center align-items-center">Birthdate: </label>
+                                                <input type="date" name="birthdate" class="vDateField"
+                                                       style="border-color: #e61a1a" size="10"
+                                                       id="birthdate"
+                                                       placeholder="Birthdate" autocomplete="bday" required>
+                                                <div class="input-group-text">
+                                                    <label class="fas fa-calendar" style="color: #e61a1a"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <input class="" type="file" name="picture" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" style="border-color: #e61a1a"
+                                                       type="checkbox" value=""
+                                                       id="exampleCheckbox">
+                                                <label class="form-check-label" for="exampleCheckbox">
+                                                    I agree to the
+                                                    <a href="#" class="text-center" style="color: #3379E1;"
+                                                       data-bs-toggle="modal" data-bs-target="#terms">
+                                                        terms and conditions
+                                                    </a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-end">
+                                                <a href="{% url "login" %}" class="text-center" style="color: #3379E1;">
+                                                    I already have an account
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid p-4">
+                                        <div class="row justify-content-center">
+                                            <div class="col auto">
+                                                <div class="text-center">
+                                                    <button type="button" id="button"
+                                                            class="btn btn-lg btn-outline-primary rounded-4">Sign Up
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="terms" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5"
+                            style="-webkit-text-stroke: 1px #e61a1a; color: black;font-size: 20px" id="terms">
+                            <i class="bi bi-clipboard-check-fill" style="color: white"
+                            ></i> Terms and Conditions</h1>
+                        <button type="button" data-bs-dismiss="modal" style="background-color: transparent;border: 0">
+                            <i class="bi bi-x-lg" style="color: #e61a1a;"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align:justify;font-family:Times New Roman;font-size: 16px">
+                            <b>Welcome to Memorizers !</b>
+                            <br>
+                            These terms and conditions outline the rules and regulations for the use of Company
+                            Memorizers' Website, located at <a
+                                href="{% url "home" %}" class="text-center" style="color: #3379E1;">Memorizers.com</a>.
+                            By accessing this website we assume
+                            you accept these terms and conditions. Do not continue to use Website Memorizers if you do
+                            not agree to take all of the terms and conditions stated on this page.
+                            <br>
+                            <b>Cookies</b>
+                            <br>
+                            We employ the use of cookies. By accessing Website Memorizers, you agreed to use cookies in
+                            agreement with the Company Memorizers Privacy Policy. Most interactive
+                            websites use cookies to let us retrieve the user's details for each visit. Cookies are used
+                            by our website to enable the functionality of certain areas to make it easier for
+                            people visiting our website. Some of our affiliate/advertising partners may also use
+                            cookies.
+                            <br>
+                            <b>License</b>
+                            <br>
+                            Unless otherwise stated, Company Memorizers and/or its licensors own the intellectual
+                            property rights for all material on Memorizers. All intellectual property rights are
+                            reserved. You may access this from Memorizers for your own personal use subjected to
+                            restrictions set in these terms and conditions.
+                            <br>
+                            <b>You must NOT</b>
+                            <br>
+                            - Republish material from Memorizers
+                            - Sell, rent or sub-license material from Memorizers
+                            - Reproduce, duplicate or copy material from Memorizers
+                            - Redistribute content from Memorizers
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock content %}
