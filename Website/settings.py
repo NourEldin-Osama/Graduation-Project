@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.text_simplification',
     'apps.image_generation',
-    # 'apps.video_generation',
+    'apps.video_generation',
 
     # The following apps are required:
     'django.contrib.sites', 'allauth', 'allauth.account', 'allauth.socialaccount',
