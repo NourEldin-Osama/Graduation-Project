@@ -17,6 +17,34 @@
     {% endif %}
 {% endblock head %}
 {% block content %}
+    <div class="modal fade" tabindex="-1" id="recordModal" style="color: black">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-capitalize">
+                        ⚠️ we will take a photo automatically just don't move
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <section id="Face_Detector_Webcam" class="col-auto position-relative p-0">
+                            <video class="selfie-mode" autoplay playsinline id="webcam" width="600px"></video>
+                            <canvas id="output_canvas" class="position-absolute top-0 start-0 selfie-mode"></canvas>
+                            <canvas id="canvas" hidden></canvas>
+                        </section>
+                    </div>
+                </div>
+                <div class="modal-footer position-relative justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeWebcam()">Close</button>
+                    <div class="form-check form-switch position-absolute top-50 end-0 translate-middle-y">
+                        <input class="form-check-input" type="checkbox" name="selfie-mode" id="selfie-mode" checked>
+                        <label class="form-check-label" for="selfie-mode">Selfie Mode</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h1 class="text-center my-4 title-style">Character Transformation</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -36,8 +64,13 @@
                         <label id="upload-btn" class="btn btn-outline-secondary border-0 secondary-button"
                                for="upload-video-input-element"
                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upload">
-                            <i class="bi bi-upload"></i>
+                            <i class="bi bi-upload"></i> Upload
                         </label>
+                        <!-- Trigger the modal when clicking the "Record" label -->
+                        <button id="record-btn" class="btn btn-outline-secondary border-0 secondary-button" data-bs-toggle="modal"
+                                data-bs-target="#recordModal" onclick="startRecording()">
+                            <i class="bi bi-camera-video"></i> Record
+                        </button>
                     </div>
                 </div>
             </div>
@@ -106,7 +139,8 @@
                                 <label class="btn btn-outline-primary character-img-container"
                                        for="character_{{ forloop.counter }}">
                                     <div class="text-center text-capitalize">{{ character.name }}</div>
-                                    <img src="{{ character.image.url }}" class="img-fluid character-img" alt="{{ character.name }}">
+                                    <img src="{{ character.image.url }}" class="img-fluid character-img"
+                                         alt="{{ character.name }}">
                                 </label>
                             </div>
                         {% endfor %}
@@ -166,6 +200,74 @@
                 $button.text('Transform');
                 $button.prop('disabled', false);
             }
+        }
+
+            let mediaRecorder;
+            let recordedChunks = [];
+
+            // Function to start recording from the webcam with audio
+            async function startRecording() {
+                const webcam = document.getElementById('webcam');
+                const constraints = { video: true, audio: true };
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    webcam.srcObject = stream;
+
+                    recordedChunks = []; // Reset the recordedChunks
+
+                    mediaRecorder = new MediaRecorder(stream);
+
+                    mediaRecorder.ondataavailable = event => {
+                        if (event.data.size > 0) {
+                            recordedChunks.push(event.data);
+                        }
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+
+                        // Convert the recordedBlob to Base64 string
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            const base64String = reader.result;
+                            displayRecordedVideo(base64String);
+                        };
+                        reader.readAsDataURL(recordedBlob);
+
+                        webcam.srcObject = null;
+                    };
+
+                    mediaRecorder.start();
+                } catch (error) {
+                    console.error('Error starting recording:', error);
+                }
+            }
+
+            // Function to close the webcam and audio streams
+            async function closeWebcam() {
+                    document.getElementById('upload-btn').style.display = 'none';
+                    document.getElementById('record-btn').style.display = 'none';
+
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                }
+
+                const webcamStream = webcam.srcObject;
+                if (webcamStream) {
+                    webcamStream.getTracks().forEach(track => track.stop());
+                }
+
+                webcam.srcObject = null;
+            }
+        // Function to display recorded video from Base64 string
+        function displayRecordedVideo(base64String) {
+            const uploadedVideo = document.getElementById('uploaded-video');
+            uploadedVideo.src = base64String;
+            uploadedVideo.style.display = 'block';
+
+            const modal = new bootstrap.Modal(document.getElementById('recordModal'));
+            modal.hide();
         }
 
         function show_uploaded_video() {
@@ -289,3 +391,4 @@
         });
     </script>
 {% endblock content %}
+
