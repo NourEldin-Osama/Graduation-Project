@@ -1,7 +1,7 @@
 <h3 class="text-left mb-1 title-style">
     Personal Information
 </h3>
-<div class="form-control mt-3 px-5 py-3 main-container" id="settings">
+<form class="form-control mt-3 px-5 py-3 main-container" id="form">
     <div class="row">
         <div class="col">
             <div class="form-floating mt-2 mb-3">
@@ -168,4 +168,47 @@
             </div>
         </div>
     </div>
-</div>
+</form>
+<script>
+    $(document).ready(function () {
+        $('.success-btn').click(function () {
+            let form = $('#form');
+            let formData = new FormData(form[0]);
+            // print the form data to the console
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            $.ajax({
+                url: "{% url 'update_personal_info' %}",
+                type: "POST",
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data['success']) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Your profile has been updated successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Your profile has not been updated',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script>

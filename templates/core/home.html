@@ -16,4 +16,53 @@
     {% elif request.COOKIES.design_mode == "Lavender_Love" %}
         {% include  "lavender_love/home.html" %}
     {% endif %}
+    <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/lite-youtube-embed/src/lite-yt-embed.css"/>
+    <script src="https://fastly.jsdelivr.net/npm/lite-youtube-embed/src/lite-yt-embed.js"></script>
+    {# create a modal using bootstrap that open the page load with check box to not show again #}
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">How To Use Memorizers</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <lite-youtube videoid="qeeZ6zWUchw" class="col"
+                                      playlabel="Memorizers Live: Exploring Features Through a Step-by-Step Interactive Demo">
+                        </lite-youtube>
+                    </div>
+                </div>
+                <div class="modal-footer position-relative justify-content-center">
+                    <div class="position-absolute ps-2 top-50 start-0 translate-middle-y">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               value=""
+                               id="demo_checkbox">
+                        <label class="" for="demo_checkbox">
+                            Don't show again
+                        </label>
+                    </div>
+
+                    {# add close button to close the modal #}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            if (localStorage.getItem("modal") !== "true") {
+                $('#modal').modal('show');
+            }
+            {# check if the check box is checked #}
+            $('#demo_checkbox').click(function () {
+                if ($(this).is(':checked')) {
+                    localStorage.setItem("modal", "true");
+                } else {
+                    localStorage.setItem("modal", "false");
+                }
+            });
+        });
+    </script>
 {% endblock content %}

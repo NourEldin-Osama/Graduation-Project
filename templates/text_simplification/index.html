@@ -1,6 +1,21 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
+{% block head %}
+    {% if request.COOKIES.design_mode == "Lavender_Love" %}
+        <style>
+            body {
+                background-image: url('{% static "images/lavender_love/top_left_light.png" %}'), url('{% static "images/lavender_love/bottom_right_light.png" %}');
+                background-size: auto, contain;
+                background-repeat: no-repeat, no-repeat;
+                background-position: top left, right bottom;
+            }
+            [data-bs-theme="dark"] body {
+                background-image: url('{% static "images/lavender_love/top_left_dark.png" %}'), url('{% static "images/lavender_love/bottom_right_dark.png" %}');
+            }
+        </style>
+    {% endif %}
+{% endblock head %}
 {% block content %}
-    {% load static %}
     <h1 class="text-center my-4 title-style">Text Simplification</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -12,7 +27,8 @@
                          style="height: 325px; overflow: auto;"></div>
                     <div class="position-absolute top-100 start-0 translate-middle"
                          style="padding-right: 45px; padding-bottom: 70px">
-                        <button type="button" id="mic-btn" class="btn btn-outline-secondary secondary-button rounded-start border-end-0"
+                        <button type="button" id="mic-btn"
+                                class="btn btn-outline-secondary secondary-button rounded-start border-end-0"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voice typing">
                             <i class="bi bi-mic"></i>
                         </button>
@@ -28,7 +44,8 @@
                               style="height: 325px; overflow: auto;"></textarea>
                     <div class="position-absolute top-0 start-100 translate-middle"
                          style="padding-left: 41px; padding-top: 65px">
-                        <button type="button" id="copy-to-clipboard" class="btn btn-outline-secondary secondary-button rounded-end border-start-0"
+                        <button type="button" id="copy-to-clipboard"
+                                class="btn btn-outline-secondary secondary-button rounded-end border-start-0"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copy to clipboard">
                             <i class="bi bi-clipboard"></i>
                         </button>
@@ -98,7 +115,12 @@
                     'input_text': $("#text-to-simplify").text(),
                 }),
                 success: function (result) {
-                    $("#simplified-text").text(result['simplified_text']);
+                    if (result['premium'] === true){
+                        show_alert("warning", "Please upgrade to premium to continue using the service.");
+                    }
+                    else {
+                        $("#simplified-text").text(result['simplified_text']);
+                    }
                 },
                 error: function (result) {
                     show_alert("error", "Error");

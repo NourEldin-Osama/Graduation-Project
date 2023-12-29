@@ -1,0 +1,100 @@
+{% load static %}
+<style>
+
+    body {
+        overflow-x: hidden;
+    }
+
+</style>
+<div data-bs-spy="scroll" data-bs-target="#Navbar" data-offset="76">
+    <div class="container-fluid p-0 text-center" id="Home" style="margin-bottom: -100px!important; height: 800px">
+        <div class="dot position-absolute rounded-circle border" style=""></div>
+        <div class=" position-absolute circle-image d-flex flex-column justify-content-center align-items-center"
+             style="background-image: url(/static/images/lavender_love/1_Dark.png); top: 140px; left: 155px; color: #462169">
+            <h1 class="" style="color: #462169">IMAGE</h1>
+            <div>Make an image <br> of your text</div>
+        </div>
+        <div class=" position-absolute circle-image d-flex flex-column justify-content-center align-items-center"
+             style="background-image: url(/static/images/lavender_love/3_Dark.png); top: 458px; left: 540px; color: #462169">
+            <h1 class=class="" style="color: #462169">TEXT</h1>
+            <div>Simplify your text <br> by another text</div>
+        </div>
+        <div class=" position-absolute circle-image d-flex flex-column justify-content-center align-items-center"
+             style="background-image: url(/static/images/lavender_love/2_Dark.png); top: 605px; left: 995px; color: #462169">
+            <h1 class="" style="color: #462169">VIDEO</h1>
+            <div>Exchange your video <br> by a video with <br> another character</div>
+        </div>
+        <div class="d-flex flex-column text-capitalize position-absolute border border-4 rounded-pill" style="height: 125px;
+                    width: 709px; --bs-border-color: transparent; top: 209px; right: 40px;color: #ff46f5; font-size: 2.5rem; line-height: 125px">
+            PREPARE MY PRESENTATION
+        </div>
+    </div>
+    <div class="container-fluid position-relative p-0 pb-5" id="About"
+         style="margin-top: 100px!important; height: 575px">
+        <div class="position-absolute" style="top: 70px; left: 200px">
+            <div class="rounded-circle position-relative d-flex flex-column justify-content-center p-5 border secondary-circle"
+                 style="width: 500px; height: 500px;">
+                <div class=" h1 d-flex flex-column text-center text-capitalize position-absolute border border-4 rounded-pill "
+                     style="color: #692f9d; top: 215px;left: 450px; width: 180px; background-color: white; --bs-border-color: #ff94ff">
+                    about us
+                </div>
+                <div class=" h4" style="text-align:justify; color: #462169;">
+                    We are a team of five people working to develop the best products
+                    to help our customers build their presentations effectively.
+                    Our goal at a buffer has always been to do things a little differently.
+                    Since our beginnings, we have strived to create the most unique systems possible.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid position-relative p-0" id="Contacts"
+         style="height: 640px">
+        <div class="position-absolute" style="top: 10px; left: 800px">
+            <div class="rounded-circle position-relative d-flex flex-column justify-content-center p-5 border secondary-circle"
+            style="width: 620px; height: 620px;">
+                <div class=" h1 d-flex flex-column text-center text-capitalize position-absolute border border-4 rounded-pill "
+                     style="color: #692f9d; top: 270px;left: -162px; width: 205px; background-color: white; --bs-border-color: #ff94ff">
+                    contact us
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="row justify-content-center m-0 pt-2 text-center">
+                        <div class="col-12">
+                            <div class="row mb-5">
+                                <div class="col-12">
+                                    <i class="bi bi-geo-alt-fill contacts-icon-style rounded-5"></i>
+                                </div>
+                                <div class="contacts-title-style">Address</div>
+                                <div class="contacts-text">
+                                    7 Memorizers Buildings,<br>
+                                    90th Street, Fifth Settlement,<br>
+                                    New Cairo, Egypt<br>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-12">
+                                    <i class="bi bi-telephone-fill contacts-icon-style rounded-5"></i>
+                                </div>
+                                <div class="contacts-title-style">Phone</div>
+                                <div class="contacts-text">
+                                    Number: {{ contact_phone }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <i class="bi bi-envelope contacts-icon-style rounded-5"></i>
+                                </div>
+                                <div class="contacts-title-style">Email</div>
+                                <div>
+                                    <a class="link-primary" href="mailto:{{ contact_email }}">
+                                        {{ contact_email }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

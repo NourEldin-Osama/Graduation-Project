@@ -119,6 +119,17 @@ textarea {
 
 .selfie-mode {
     transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+}
+
+.input-group-text:has(.social-media-icon) {
+    padding: 0.1rem 0.5rem;
+    background-color: white;
+}
+
+.enable-facial-icon {
+    border-color: transparent!important;
 }
 
 [data-bs-theme="dark"] {

@@ -123,8 +123,7 @@
                 <div class="contacts-title-style">Address</div>
                 <div>
                     7 Memorizers Buildings,<br>
-                    90th Street,<br>
-                    Fifth Settlement,<br>
+                    90th Street, Fifth Settlement,<br>
                     New Cairo, Egypt<br>
                 </div>
             </div>
@@ -132,16 +131,15 @@
                 <i class="bi bi-telephone-fill contacts-icon-style rounded-5"></i>
                 <div class="contacts-title-style">Phone</div>
                 <div>
-                    Hotline: 1111111<br>
-                    Number: +20 111 256 1721
+                    Number: {{ contact_phone }}
                 </div>
             </div>
             <div class="col-3">
                 <i class="bi bi-envelope contacts-icon-style rounded-5"></i>
                 <div class="contacts-title-style">Email</div>
                 <div>
-                    <a class="link-primary" href="mailto:MemorizersGroup@gmail.com">
-                        MemorizersGroup@gmail.com
+                    <a class="link-primary" href="mailto:{{ contact_email }}">
+                        {{ contact_email }}
                     </a>
                 </div>
             </div>

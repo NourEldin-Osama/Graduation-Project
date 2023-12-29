@@ -1,9 +1,11 @@
 import datetime
 
+import requests
 from django.conf import settings as django_settings
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -15,6 +17,8 @@ print(f"Local Host: http://127.0.0.1:8000/")
 print(f"Local Network IP: http://{django_settings.LOCAL_IP}:8000/")
 DEFAULT_DESIGN_MODE = "Red_Dragon"
 AVAILABLE_DESIGN_MODES = ["Red_Dragon", "Blue_Diamond", "Lavender_Love"]
+CONTACT_EMAIL = django_settings.CONTACT_EMAIL
+CONTACT_PHONE = django_settings.CONTACT_PHONE
 
 
 def anonymous_required(function=None, redirect_url=None):
@@ -86,7 +90,8 @@ def signup(request):
 
 @anonymous_required
 def login(request):
-    context = {"title": "Login"}
+    context = {"title": "Login", 'SOCIAL_MICROSOFT_PREMIUM': django_settings.SOCIAL_MICROSOFT_PREMIUM,
+               'SOCIAL_LINKEDIN_PREMIUM': django_settings.SOCIAL_LINKEDIN_PREMIUM}
     if request.method == "POST":
         username_email = request.POST.get("username_email", "")
         password = request.POST.get("password", "")
@@ -113,7 +118,7 @@ def login(request):
 
 
 def home(request):
-    context = {"title": "Home"}
+    context = {"title": "Home", "contact_email": CONTACT_EMAIL, "contact_phone": CONTACT_PHONE}
     return render(request, 'core/home.html', context)
 
 
@@ -131,7 +136,8 @@ def profile(request):
 
 @login_required
 def settings(request, template="personal_information"):
-    context = {"title": "Settings"}
+    context = {"title": "Settings", 'SOCIAL_MICROSOFT_PREMIUM': django_settings.SOCIAL_MICROSOFT_PREMIUM,
+               'SOCIAL_LINKEDIN_PREMIUM': django_settings.SOCIAL_LINKEDIN_PREMIUM}
     root = "core/settings/"
     if template == "personal_information":
         context['template'] = root + "personal_information.html"
@@ -196,3 +202,54 @@ def set_design_mode(request):
         max_age=datetime.timedelta(days=365)
     )
     return response
+
+
+@api_view(['POST'])
+def update_personal_info(request):
+    """
+    This function updates the user's profile information.
+    It retrieves the user's information from the request body,
+    and updates the user's information in the database.
+    """
+    data = request.data
+    user = request.user
+    print(data)
+    print(user)
+    # user.first_name = data.get('first_name', user.first_name) or user.first_name
+    # user.last_name = data.get('last_name', user.last_name) or user.last_name
+    # user.username = data.get('username', user.username) or user.username
+    # user.email = data.get('email', user.email) or user.email
+    # user.phone = data.get('phone', user.phone) or user.phone
+    # user.country = data.get('country', user.country) or user.country
+    # user.city = data.get('city', user.city) or user.city
+    # user.birthdate = data.get('birthdate', user.birthdate) or user.birthdate
+    # user.gender = data.get('gender', user.gender) or user.gender
+    return Response({'message': 'Success'}, status=200)
+
+
+@api_view(['POST'])
+def facial_login(request):
+    frame = request.POST.get('image')
+    payload = {'image': frame}
+    r = requests.post("https://facialauthentication.pythonanywhere.com/recognize_user", data=payload)
+    if r.status_code == 200 and r.json()['username'] != "":
+        u = User.objects.get(username=r.json()['username'])
+        auth.login(request, u, backend='django.contrib.auth.backends.ModelBackend')
+        return Response({'result': "Done"}, status=200)
+    return Response({'result': "Fail"}, status=200)
+
+
+@api_view(['POST'])
+def enable_facial_login(request):
+    frame = request.POST.get('image')
+    payload = {'image': frame, 'username': request.user.username}
+    r = requests.post("https://facialauthentication.pythonanywhere.com/add_user", data=payload)
+    if r.status_code == 200:
+        request.user.facial_login = True
+        request.user.save()
+        return Response({'result': "Done"}, status=200)
+    return Response({'result': "Fail"}, status=200)
+
+
+def health_check(request):
+    return HttpResponse("OK", status=200)

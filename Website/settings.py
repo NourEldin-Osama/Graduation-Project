@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from socket import gethostbyname, gethostname
 
-from decouple import config
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,22 @@ SECRET_KEY = config('SECRET_KEY', default='django_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 LOCAL_IP = gethostbyname(gethostname())
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', LOCAL_IP]
+ALLOWED_HOSTS = config(
+    'WEBSITE_HOST_NAME',
+    default=f'localhost, 127.0.0.1',
+    cast=Csv()
+)
+ALLOWED_HOSTS += [LOCAL_IP]
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://localhost, http://localhost,'
+            'https://127.0.0.1, http://127.0.0.1',
+    cast=Csv()
+)
+
+# Contacts
+CONTACT_EMAIL = config('CONTACT_EMAIL', default="NY.Tech.World@gmail.com")
+CONTACT_PHONE = config('CONTACT_PHONE', default="+20 106 912 9335")
 
 # APIs URLs
 IMAGE_GENERATION_API_URL = config('IMAGE_GENERATION_API_URL', default='')
@@ -37,8 +52,20 @@ VIDEO_GENERATION_API_URL = config('VIDEO_GENERATION_API_URL', default='')
 # API Keys
 OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
 
-# Application definition
+# Image Generation Settings
+IMAGE_GENERATION_STEPS = config('IMAGE_GENERATION_STEPS', default=25, cast=int)
 
+# Character Transformation Settings
+CHARACTER_TRANSFORMATION_MODE = config('CHARACTER_TRANSFORMATION_MODE', default='ultra_fast')
+
+# Premium Plan Settings
+IMAGE_GENERATION_PREMIUM = config('IMAGE_GENERATION_PREMIUM', default=False, cast=bool)
+TEXT_SIMPLIFICATION_PREMIUM = config('TEXT_SIMPLIFICATION_PREMIUM', default=False, cast=bool)
+CHARACTER_TRANSFORMATION_PREMIUM = config('CHARACTER_TRANSFORMATION_PREMIUM', default=False, cast=bool)
+SOCIAL_MICROSOFT_PREMIUM = config('SOCIAL_MICROSOFT_PREMIUM', default=False, cast=bool)
+SOCIAL_LINKEDIN_PREMIUM = config('SOCIAL_LINKEDIN_PREMIUM', default=False, cast=bool)
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +90,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
-
 ]
 
 MIDDLEWARE = [
@@ -105,10 +131,9 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3', cast=Path),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -128,7 +153,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -144,13 +168,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = (
-    BASE_DIR / 'static',
-)
+if DEBUG:
+    STATICFILES_DIRS = (
+        BASE_DIR / 'static',
+    )
+else:
+    STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = config('MEDIA_ROOT', default=BASE_DIR / 'media', cast=Path)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -181,10 +207,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         },
-        "APP": {
-            "client_id": "",
-            "secret": " ",
-        },
     },
 }
 
@@ -198,3 +220,4 @@ SOCIALACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_ADAPTER = "Website.adapter.SocialAccountAdapter"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

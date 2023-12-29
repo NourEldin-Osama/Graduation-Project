@@ -1,7 +1,23 @@
 {% extends "layouts/base.html" %}
 {% load static %}
+{% block head %}
+    {% if request.COOKIES.design_mode == "Lavender_Love" %}
+        <style>
+            body {
+                background-image: url('{% static "images/lavender_love/top_left_light.png" %}'), url('{% static "images/lavender_love/bottom_right_light.png" %}');
+                background-size: auto, contain;
+                background-repeat: no-repeat, no-repeat;
+                background-position: top left, right bottom;
+            }
+
+            [data-bs-theme="dark"] body {
+                background-image: url('{% static "images/lavender_love/top_left_dark.png" %}'), url('{% static "images/lavender_love/bottom_right_dark.png" %}');
+            }
+        </style>
+    {% endif %}
+{% endblock head %}
 {% block content %}
-    <h1 class="text-center my-4 title-style">Video Conversion</h1>
+    <h1 class="text-center my-4 title-style">Character Transformation</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-5">
@@ -17,7 +33,8 @@
                     <div class="position-absolute top-50 start-50 translate-middle">
                         <input type="file" id="upload-video-input-element" accept="video/*"
                                onchange="show_uploaded_video()" hidden/>
-                        <label id="upload-btn" class="btn btn-outline-secondary border-0 secondary-button" for="upload-video-input-element"
+                        <label id="upload-btn" class="btn btn-outline-secondary border-0 secondary-button"
+                               for="upload-video-input-element"
                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upload">
                             <i class="bi bi-upload"></i>
                         </label>
@@ -26,7 +43,7 @@
             </div>
             <div class="col-5">
                 <label class="form-label h4 d-flex justify-content-center">
-                    Converted Video
+                    Transformed Video
                 </label>
                 <div class="position-relative">
                     <div class="form-control" style="height: 325px">
@@ -35,14 +52,16 @@
                         </video>
                     </div>
                     <div class="position-absolute top-0 end-0 p-2">
-                        <a id="download" class="btn btn-outline-secondary border-0 secondary-button" href="" download="output"
+                        <a id="download" class="btn btn-outline-secondary border-0 secondary-button" href=""
+                           download="output"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download"
                            style="display: none">
                             <i class="bi bi-download"></i>
                         </a>
                     </div>
                     <div class="position-absolute bottom-0 end-0 p-2">
-                        <button id="full-screen" class="btn btn-outline-secondary border-0 secondary-button" style="display: none"
+                        <button id="full-screen" class="btn btn-outline-secondary border-0 secondary-button"
+                                style="display: none"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Full Screen">
                             <i class="bi bi-arrows-fullscreen"></i>
                         </button>
@@ -62,7 +81,7 @@
             </div>
             <div class="col-auto">
                 <button type="button" id="button" class="btn btn-lg btn-outline-primary main-btn"
-                        style="width: 140px;">Convert
+                        style="width: 140px;">Transform
                 </button>
             </div>
         </div>
@@ -80,14 +99,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        {% for character, name in characters.items %}
+                        {% for character in characters %}
                             <div class="col-4 mb-2">
                                 <input type="radio" class="btn-check" name="Character" autocomplete="off"
-                                       id="character_{{ forloop.counter }}" value="character_{{ forloop.counter }}">
+                                       id="character_{{ forloop.counter }}" value="{{ character.id }}">
                                 <label class="btn btn-outline-primary character-img-container"
                                        for="character_{{ forloop.counter }}">
-                                    <div class="text-center text-capitalize">{{ name }}</div>
-                                    <img src="{% static character %}" class="img-fluid character-img" alt="{{ name }}">
+                                    <div class="text-center text-capitalize">{{ character.name }}</div>
+                                    <img src="{{ character.image.url }}" class="img-fluid character-img" alt="{{ character.name }}">
                                 </label>
                             </div>
                         {% endfor %}
@@ -144,7 +163,7 @@
                 $button.prop('disabled', true);
             } else {
                 // hide loading indicator
-                $button.text('Convert');
+                $button.text('Transform');
                 $button.prop('disabled', false);
             }
         }
@@ -166,6 +185,53 @@
             }
         }
 
+        function get_status(task_id) {
+            $.ajax({
+                type: "POST",
+                url: '{% url "get_status_video" %}',
+                contentType: 'application/json; charset=utf-8',
+                headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
+                data: JSON.stringify({
+                    'task_id': task_id,
+                }),
+                success: function (result) {
+                    if (result['status'] === 'COMPLETED') {
+                        get_video(task_id);
+                    } else {
+                        setTimeout(function () {
+                            get_status(task_id);
+                        }, 30000);
+                    }
+                },
+            });
+        }
+
+
+        function get_video(task_id) {
+            $.ajax({
+                type: "POST",
+                url: '{% url "get_video" %}',
+                contentType: 'application/json; charset=utf-8',
+                headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
+                data: JSON.stringify({
+                    'task_id': task_id,
+                }),
+                success: function (result) {
+                    // show success alert if request is successful
+                    show_alert("success", "Video transformed successfully!");
+
+                    // set generated video as source of video element
+                    $generated_video.attr('src', result["output_video"]);
+                    $generated_video.show();
+                    // hide loading indicator
+                    loading(false);
+                    // show full screen and download button
+                    $full_screen.show();
+                    $download.show();
+                },
+            });
+        }
+
         $button.click(function () {
             let base64String = $video.attr('src');
             if (base64String && $character) {
@@ -173,7 +239,7 @@
                 // send video file as string base 64 and character as string in json data to server using ajax
                 $.ajax({
                     type: "POST",
-                    url: '{% url "video_generation_api" %}',
+                    url: '{% url "transform_character" %}',
                     contentType: 'application/json; charset=utf-8',
                     // send csrf token in request header. csrf token is required for ajax post request
                     headers: {"X-CSRFToken": "{{ csrf_token }}"},
@@ -182,26 +248,25 @@
                         character: $character,
                     }),
                     success: function (result) {
-                        // show success alert if request is successful
-                        show_alert("success", "Video converted successfully!");
-
-                        // set generated video as source of video element
-                        $generated_video.attr('src', result["generated_video"]);
-                        $generated_video.show();
-
-                        // show full screen button
-                        $full_screen.show();
-                        // show download button
-                        $download.show();
+                        if (result['premium'] === true) {
+                            show_alert("warning", "Please upgrade to premium to continue using the service.");
+                            loading(false);
+                        }
+                        else {
+                            // show success alert if request is successful
+                            show_alert("success", "Video uploaded successfully!");
+                            // get task id from response
+                            let task_id = result["task_id"];
+                            // get status of the task
+                            get_status(task_id);
+                        }
                     },
                     error: function () {
                         // show error alert if error occurs
                         show_alert("error", "Error");
-                    },
-                    complete: function () {
-                        // this block will be executed after success or error block
+                        // hide loading indicator
                         loading(false);
-                    }
+                    },
                 });
             }
             if (!base64String && !$character) {

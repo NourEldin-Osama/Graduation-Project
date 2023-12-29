@@ -1,4 +1,4 @@
-import {FilesetResolver, HandLandmarker} from "https://cdn.skypack.dev/@mediapipe/tasks-vision@latest";
+import {FilesetResolver, HandLandmarker} from "https://fastly.jsdelivr.net/npm/@mediapipe/tasks-vision@latest";
 
 let handLandmarker = undefined;
 let running_mode = "VIDEO";  // "VIDEO" for streaming video from webcam.

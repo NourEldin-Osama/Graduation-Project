@@ -37,29 +37,49 @@ It is a web application that helps you to Create a Creative and unique design Po
 The application is written in Python using the Django
 
 ## 4. Installation
-- python is required to run the project
-- Clone the repository
-- Install the dependencies
+
+To install the project, follow these steps:
+
+1. Install python if you haven't already. You can download it from the official website: [Python](https://www.python.org/downloads/)
+2. Clone the repository using git:
+    ```bash
+    git clone https://github.com/NourEldin-Osama/Graduation-Project.git
+    ```
+3. Navigate to the project directory
+    ```bash
+    cd Graduation-Project
+    ```
+4. Create a virtual environment and activate it (optional, but recommended):
+    ```bash
+   python -m venv venv; source venv/bin/activate
+    ```
+5. Install the project dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+6. Generate the migration files:
+    ```bash
+    python manage.py makemigrations
+    ```
+7. Apply the migrations:
+    ```bash
+    python manage.py migrate
+    ```
+8. Create a superuser (optional):
+    ```bash
+    python manage.py createsuperuser
+    ```
+9. Run the server:
+    ```bash
+    python manage.py runserver
+    ```
+10. Open the browser and navigate to [localhost](http://localhost:8000/) to see the project running.
+
+You are now ready to use the project 🎉🤗.
+
+Extra: If you want a one-line command to do all of the above, run the following command:
 ```bash
-pip install -r requirements.txt
-```
-- Make the migrations
-```bash
-python manage.py makemigrations
-```
-- Create a database
-```bash
-python manage.py migrate
-```
-```bash
-python manage.py sqlmigrate core 0001
-```
-```bash
-python manage.py sqlmigrate hand_controlled_presentation 0001
-```
-- Create a superuser
-```bash
-python manage.py createsuperuser
+git clone https://github.com/NourEldin-Osama/Graduation-Project.git; cd Graduation-Project; pip install -r requirements.txt; python manage.py makemigrations; python manage.py migrate
 ```
 
 ## 5. Usage

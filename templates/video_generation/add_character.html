@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block head %}
+    {% if request.COOKIES.design_mode == "Lavender_Love" %}
+        <style>
+            body {
+                background-image: url('{% static "images/lavender_love/top_left_light.png" %}'), url('{% static "images/lavender_love/bottom_right_light.png" %}');
+                background-size: auto, contain;
+                background-repeat: no-repeat, no-repeat;
+                background-position: top left, right bottom;
+            }
+
+            [data-bs-theme="dark"] body {
+                background-image: url('{% static "images/lavender_love/top_left_dark.png" %}'), url('{% static "images/lavender_love/bottom_right_dark.png" %}');
+            }
+        </style>
+    {% endif %}
+{% endblock head %}
+{% block content %}
+    <h1>Add Character</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <div>
+            <label for="voice">Voice:</label>
+            <input type="text" id="voice" name="voice" required>
+        </div>
+        <button type="submit">Add Character</button>
+    </form>
+{% endblock content %}

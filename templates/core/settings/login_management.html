@@ -3,6 +3,35 @@
           integrity="sha512-sopmFEmRVsWt542K+yzH3FQ1KJfdosOJG+bGLs9ZJT07b/3gUxRA9ICuJg2JtoZ9WeknAUuwJ0ggnmrV1YL6kQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer">
 {% endblock head %}
+{% load static %}
+<div class="modal fade" tabindex="-1" id="facial-login" style="color: black">
+    <div class="modal-dialog modal-dialog-centered modal-xl" style="">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-capitalize">
+                    ⚠️ we will take a photo automatically just don't move
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <section id="Face_Detector_Webcam" class="col-auto position-relative p-0">
+                        <video class="selfie-mode" autoplay playsinline id="webcam" width="600px"></video>
+                        <canvas id="output_canvas" class="position-absolute top-0 start-0 selfie-mode"></canvas>
+                        <canvas id="canvas" hidden></canvas>
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer position-relative justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="form-check form-switch position-absolute top-50 end-0 translate-middle-y">
+                    <input class="form-check-input" type="checkbox" name="selfie-mode" id="selfie-mode" checked>
+                    <label class="form-check-label" for="selfie-mode">Selfie Mode</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <h3 class="text-left text-capitalize mb-1 title-style">
     login Management
 </h3>
@@ -15,95 +44,102 @@
     <div class="row">
         <div class="col-10">
             {% load socialaccount %}
+            {% get_social_accounts user as accounts %}
+
             <div class="row mb-3 text-center justify-content-between">
                 <div class="col-lg-4 zero-padding">
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands fa-google social-media-icon"
-                                 style="background-color: white;"></div>
-                        </div>
-                        <button class="btn btn-reddit btn-social-media col"
-                                type="submit">
-                            Google
-                        </button>
-                    </div>
-                    {#                                                    </form>#}
-                    {% comment %}<form action="{% provider_login_url "twitter" %}" method="post"
+                    <form action="{% provider_login_url "google" process="connect" %}" method="post"
                           class="social_button_style">
-                        {% csrf_token %}{% endcomment %}
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands fa-twitter social-media-icon"
-                                 style="color: #55ACEE"></div>
-                        </div>
-                        <button class="btn btn-twitter btn-social-media col"
-                                type="submit">
-                            Twitter
-                        </button>
-                    </div>
-
-                    {#                                                    </form>#}
-                </div>
-                <div class="col-lg-4 zero-padding">
-                    {% comment %} <form action="{% provider_login_url "facebook" method="oauth2" %}" method="post"
-                          class="social_button_style">
-                        {% csrf_token %}{% endcomment %}
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands fa-facebook-f social-media-icon"
-                                 style="color: #3B5998"></div>
-                        </div>
-                        <button class="btn btn-facebook btn-social-media col"
-                                type="submit">
-                            Facebook
-                        </button>
-                    </div>
-                    {#                                                    </form>#}
-                    {% comment %}<form action="{% provider_login_url "microsoft" %}" method="post"
-                          class="social_button_style">
-                        {% csrf_token %}{% endcomment %}
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands social-media-icon">
-                                <img style="height: 25px"
-                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAeklEQVR4nO3UMQqAMBBE0QUL7+F5LOxyxlSewTvZj/10Q8AI/gfbBpb8pAoAPklt08j4eft5aGSKBRo3IBJK8IgNv1CKhAwJpUjIkFCKhGYnBPzd0m+NjJ+na9XIFAt0bkAklOARG36hFAkZEkqRkCGhFAnNTggA6g0PsZwml5fu+o4AAAAASUVORK5CYII=">
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands fa-google social-media-icon"
+                                     style="background-color: white;"></div>
                             </div>
+                            <button class="btn btn-reddit btn-social-media col"
+                                    type="submit" {% if accounts.google %}disabled{% endif %}>
+                                {% if accounts.google %}Connected{% else %}Google{% endif %}
+                            </button>
                         </div>
-                        <button class="btn btn-microsoft btn-social-media col"
-                                type="submit">
-                            Microsoft
-                        </button>
-                    </div>
-                    {#                                                    </form>#}
+                    </form>
+                    <form action="{% provider_login_url "twitter" process="connect" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands fa-twitter social-media-icon"
+                                     style="color: #55ACEE"></div>
+                            </div>
+                            <button class="btn btn-twitter btn-social-media col"
+                                    type="submit" {% if accounts.twitter %}disabled{% endif %}>
+                                {% if accounts.twitter %}Connected{% else %}Twitter{% endif %}
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-lg-4 zero-padding">
-                    {% comment %}<form action="{% provider_login_url "github" %}" method="post"
+                    <form action="{% provider_login_url "facebook" method="oauth2" process="connect" %}" method="post"
                           class="social_button_style">
-                        {% csrf_token %}{% endcomment %}
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands fa-github social-media-icon"
-                                 style="color: #444444"></div>
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands fa-facebook-f social-media-icon"
+                                     style="color: #3B5998"></div>
+                            </div>
+                            <button class="btn btn-facebook btn-social-media col"
+                                    type="submit" {% if accounts.facebook %}disabled{% endif %}>
+                                {% if accounts.facebook %}Connected{% else %}Facebook{% endif %}
+                            </button>
                         </div>
-                        <button class="btn btn-github btn-social-media col"
-                                type="submit">
-                            Github
-                        </button>
-                    </div>
-                    {#                                                    </form>#}
-                    {% comment %}<form action="{% provider_login_url "github" %}" method="post"
+                    </form>
+                    <form action="{% provider_login_url "microsoft" process="connect" %}" method="post"
                           class="social_button_style">
-                        {% csrf_token %}{% endcomment %}
-                    <div class="input-group col-lg-12 mt-3 mb-2">
-                        <div class="input-group-text">
-                            <div class="fa-brands fa-linkedin social-media-icon"
-                                 style="color: #007BB6"></div>
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands social-media-icon">
+                                    <img style="height: 25px"
+                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAeklEQVR4nO3UMQqAMBBE0QUL7+F5LOxyxlSewTvZj/10Q8AI/gfbBpb8pAoAPklt08j4eft5aGSKBRo3IBJK8IgNv1CKhAwJpUjIkFCKhGYnBPzd0m+NjJ+na9XIFAt0bkAklOARG36hFAkZEkqRkCGhFAnNTggA6g0PsZwml5fu+o4AAAAASUVORK5CYII=">
+                                </div>
+                            </div>
+                            <button class="btn btn-microsoft btn-social-media col"
+                                    onclick="microsoft_button()"
+                                    type="submit" {% if accounts.microsoft %}disabled{% endif %}>
+                                {% if accounts.microsoft %}Connected{% else %}Microsoft{% endif %}
+                            </button>
                         </div>
-                        <button class="btn btn-linkedin btn-social-media col"
-                                type="submit">LinkedIn
-                        </button>
-                    </div>
-                    {#                                                    </form>#}
+                    </form>
+                </div>
+                <div class="col-lg-4 zero-padding">
+                    <form action="{% provider_login_url "github" process="connect" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands fa-github social-media-icon"
+                                     style="color: #444444"></div>
+                            </div>
+                            <button class="btn btn-github btn-social-media col"
+                                    type="submit" {% if accounts.github %}disabled{% endif %}>
+                                {% if accounts.github %}Connected{% else %}Github{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                    <form action="{% provider_login_url "linkedin_oauth2" process="connect" %}" method="post"
+                          class="social_button_style">
+                        {% csrf_token %}
+                        <div class="input-group col-lg-12 mt-3 mb-2">
+                            <div class="input-group-text">
+                                <div class="fa-brands fa-linkedin social-media-icon"
+                                     style="color: #007BB6"></div>
+                            </div>
+                            <button class="btn btn-linkedin btn-social-media col"
+                                    onclick="linkedin_button()"
+                                    type="submit" {% if accounts.linkedin %}disabled{% endif %}>
+                                {% if accounts.linkedin %}Connected{% else %}LinkedIn{% endif %}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -116,10 +152,87 @@
     </div>
     <div class="row my-2">
         <div>
-            <button class="btn btn-light rounded-pill rounded-5 p-0 enable-facial-icon"
-                    style=" width:90px; height: 50px">
-                <i class="bi bi-camera" style="font-size:35px"></i>
-            </button>
+            {% if user.facial_login %}
+                <button id="facial-login-button"
+                        class="btn btn-light rounded-pill rounded-5 p-0 enable-facial-icon d-flex align-items-center justify-content-center"
+                        style=" width:130px; height: 50px; font-size: 18px; --bs-btn-disabled-bg: #dbdde0;" disabled>
+                    Enabled &nbsp;
+                    <i class="bi bi-camera" style="font-size:35px"></i>
+                </button>
+            {% else %}
+                <button id="facial-login-button" class="btn btn-light rounded-pill rounded-5 p-0 enable-facial-icon"
+                        style=" width:90px; height: 50px">
+                    <i class="bi bi-camera" style="font-size:35px"></i>
+                </button>
+            {% endif %}
         </div>
     </div>
 </div>
+<script type="module" src="{% static 'js/Face_Detector.js' %}"></script>
+<script>
+    let facial_login_modal = document.getElementById("facial-login");
+    const video = document.getElementById("webcam");
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    let running = false;
+    let camera_button = $("#facial-login-button");
+    window.on_face_detection = async function () {
+        if (!running) {
+            running = true;
+            width = canvas.width = video.offsetWidth;
+            height = canvas.height = video.offsetHeight;
+            context.clearRect(0, 0, width, height);
+            context.drawImage(video, 0, 0, width, height);
+            let image = canvas.toDataURL('image/jpeg', 1);
+            $.ajax({
+                type: 'POST',
+                url: "{% url "enable_facial_login" %}",
+                headers: {"X-CSRFToken": "{{ csrf_token }}"},
+                data: {'image': image},
+                success: async function (response) {
+                    console.log(response)
+                    if (response["result"] === "Done") {
+                        // add disabled attr to camera button
+                        camera_button.attr("disabled", true);
+                        // add the button classes for disabled
+                        camera_button.addClass("d-flex align-items-center justify-content-center");
+                        // change the button width
+                        camera_button.css("width", "130px");
+                        // change button font size
+                        camera_button.css("font-size", "18px");
+                        // change button background color
+                        camera_button.css("--bs-btn-disabled-bg", "#dbdde0");
+                        // add "enabled" text word on the camera button beside the camera icon
+                        camera_button.html('Enabled &nbsp; <i class="bi bi-camera" style="font-size:35px"></i>');
+                        // close the modal
+                        await bootstrap.Modal.getOrCreateInstance(facial_login_modal).hide();
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                },
+                complete: function () {
+                    running = false;
+                }
+            })
+        }
+    }
+
+    function microsoft_button() {
+        event.preventDefault();
+        if ("{{ SOCIAL_MICROSOFT_PREMIUM }}" === "True") {
+            show_alert("warning", "Please upgrade to premium to continue using the service.");
+        } else {
+            event.target.form.submit();
+        }
+    }
+
+    function linkedin_button() {
+        event.preventDefault();
+        if ("{{ SOCIAL_LINKEDIN_PREMIUM }}" === "True") {
+            show_alert("warning", "Please upgrade to premium to continue using the service.");
+        } else {
+            event.target.form.submit();
+        }
+    }
+</script>

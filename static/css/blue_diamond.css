@@ -22,6 +22,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    --bs-btn-disabled-color: white;
 }
 
 .main-btn:before {
@@ -175,11 +176,6 @@
     font-size: 25px;
 }
 
-.input-group-text:has(.social-media-icon) {
-    padding: 0.1rem 0.5rem;
-    background-color: white;
-}
-
 /* Home Page Style */
 .cards-style {
     background-color: var(--blue);
@@ -256,6 +252,7 @@ footer {
 
 .contacts-title-style {
     color: var(--blue);
+    font-weight: bold;
 }
 
 input::file-selector-button {
@@ -335,12 +332,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--bluelight);
 }
 
-.enable-facial-icon {
-    color: var(--blue);
-    background-color: #cfcfff;
-    border-color: var(--blue);
-}
-
 .get-inspired-title {
     color: var(--blue);
 }
@@ -392,7 +383,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .carousel-indicators [data-bs-target] {
     background-color: white !important;
 }
-
 
 .contact-img-shadow {
     box-shadow: -30px 30px #ffffff5c;
@@ -525,10 +515,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .contact-img-shadow {
         box-shadow: -30px 30px #89b4fc45
-    }
-
-    .enable-facial-icon {
-        background-color: #89b4fc;
     }
 
     #mic-btn{

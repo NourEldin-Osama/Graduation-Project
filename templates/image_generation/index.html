@@ -1,6 +1,22 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
+{% block head %}
+    {% if request.COOKIES.design_mode == "Lavender_Love" %}
+        <style>
+            body {
+                background-image: url('{% static "images/lavender_love/top_left_light.png" %}'), url('{% static "images/lavender_love/bottom_right_light.png" %}');
+                background-size: auto, contain;
+                background-repeat: no-repeat, no-repeat;
+                background-position: top left, right bottom;
+            }
+
+            [data-bs-theme="dark"] body {
+                background-image: url('{% static "images/lavender_love/top_left_dark.png" %}'), url('{% static "images/lavender_love/bottom_right_dark.png" %}');
+            }
+        </style>
+    {% endif %}
+{% endblock head %}
 {% block content %}
-    {% load static %}
     <h1 class="text-center my-4 title-style">Image Generation</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -59,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <script>
         let $button = $("#button");
         let $generated_image = $("#generated-image");
@@ -114,27 +129,67 @@
             $download.show();
         }
 
+        function get_status(task_id) {
+            $.ajax({
+                type: "POST",
+                url: '{% url "get_status_image" %}',
+                contentType: 'application/json; charset=utf-8',
+                headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
+                data: JSON.stringify({
+                    'task_id': task_id,
+                }),
+                success: function (result) {
+                    if (result['status'] === 'Finished') {
+                        get_image(task_id);
+                    } else {
+                        setTimeout(function () {
+                            get_status(task_id);
+                        }, 2000);
+                    }
+                },
+            });
+        }
+
+        function get_image(task_id) {
+            $.ajax({
+                type: "POST",
+                url: '{% url "get_image" %}',
+                contentType: 'application/json; charset=utf-8',
+                headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
+                data: JSON.stringify({
+                    'task_id': task_id,
+                }),
+                success: function (result) {
+                    $generated_image.attr('src', result['image_base64']);
+                    show_image();
+                    loading(false);
+                },
+            });
+        }
+
         $button.click(function (e) {
             loading(true);
             $.ajax({
                 type: "POST",
-                url: '{% url "image_generation_api" %}',
+                url: '{% url "generate_image" %}',
                 contentType: 'application/json; charset=utf-8',
                 headers: {"X-CSRFToken": "{{ csrf_token }}"}, // this is the csrf token for logged-in users
                 data: JSON.stringify({
                     'text_prompt': $("#text-prompt").text(),
                 }),
                 success: function (result) {
-                    $generated_image.attr('src', result['image_base64']);
-                    show_image();
+                    if (result['premium'] === true){
+                        show_alert("warning", "Please upgrade to premium to continue using the service.");
+                        loading(false);
+                    }
+                    else {
+                        get_status(result['task_id']);
+                    }
                 },
                 error: function (result) {
                     show_alert("error", "Error");
-                },
-                complete: function () {
-                    // this block will be executed after success or error block
                     loading(false);
-                }
+                },
             });
         });
     </script>

@@ -1,0 +1,640 @@
+:root {
+    --lavender: #cf97f2;
+    --lavender-rgb: 207, 151, 242;
+    --lavender-dark: #692f9d;
+    --lavender-light: #e5cafd;
+    --red: #E61A1A;
+    --green: #71D456;
+}
+
+.bg-body-tertiary {
+    --bs-tertiary-bg-rgb: var(--lavender-rgb);
+}
+
+.main-container {
+    background-image: url('/static/images/lavender_love/setting.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.main-btn {
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    --bs-btn-hover-color: #64289a;
+    --bs-btn-hover-bg: #8645c2;
+    --bs-btn-active-bg: var(--lavender-dark);
+    --bs-btn-disabled-color: white;
+    --bs-btn-disabled-bg: #8645c2;
+}
+
+.main-btn:before {
+    content: "";
+    background: linear-gradient(
+            45deg,
+            #cf97f2,
+            #8645c2,
+            #cf97f2,
+            #cf97f2,
+            #8645c2,
+            #cf97f2,
+            #cf97f2
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.main-btn:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.main-btn:hover:before {
+    opacity: 0;
+}
+
+.main-btn:hover:after {
+    background: white;
+    background: linear-gradient(
+            45deg,
+            #ebd1fc,
+            #ebd1fc
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main-hover {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
+/*.main-btn {
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    --bs-btn-hover-color: #64289a;
+    --bs-btn-hover-bg: #8645c2;
+    --bs-btn-active-bg: var(--lavender-dark);
+    --bs-btn-disabled-color: white;
+    --bs-btn-disabled-bg: #8645c2;
+}
+
+.main-btn:before {
+    content: "";
+    background: linear-gradient(
+            0deg,
+            #cf97f2,
+            #8645c2,
+            #cf97f2,
+            #cf97f2,
+            #8645c2,
+            #cf97f2,
+            #cf97f2
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400% 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400% 0;
+    }
+}
+
+.main-btn:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.main-btn:hover:before {
+    opacity: 0;
+}
+
+.main-btn:hover:after {
+    background: white;
+    background: linear-gradient(
+            0deg,
+            #ebd1fc,
+            #ebd1fc
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main-hover {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400% 0;
+    }
+}*/
+
+.secondary-btn {
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #c932c1;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    --bs-btn-active-bg: #ff46f5;
+    --bs-btn-hover-bg: #c932c1;
+    --bs-btn-hover-color: #751871;
+}
+
+.secondary-btn:before {
+    content: "";
+    background: linear-gradient(
+            45deg,
+            #ff46f5,
+            #c932c1,
+            #ff46f5,
+            #ff46f5,
+            #c932c1,
+            #ff46f5,
+            #ff46f5
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.secondary-btn:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.secondary-btn:hover:before {
+    opacity: 0;
+}
+
+.secondary-btn:hover:after {
+    background: white;
+    background: linear-gradient(
+            45deg,
+            #ff46f5,
+            #ff46f5
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-main 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-main-hover {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.title-style {
+    -webkit-text-stroke: 1px var(--lavender);
+    color: black;
+}
+
+.form-control {
+    border-color: var(--lavender) !important;
+}
+
+.form-control:focus {
+    border-color: var(--lavender);
+    box-shadow: 0 0 0 0.25rem var(--lavender);
+}
+
+#mic-btn {
+    --bs-btn-border-radius: 0rem 0px;
+    --bs-btn-border-color: var(--lavender-dark);
+    --bs-btn-bg: white;
+}
+
+input[type="checkbox"] {
+    border-color: var(--lavender-light);
+    background-color: var(--lavender);
+}
+
+.personal-information {
+    border-color: var(--bluelight);
+    background-color: transparent;
+}
+
+.setting-radio-button > input[type="radio"] {
+    border-color: var(--lavender);
+}
+
+#copy-to-clipboard {
+    --bs-btn-border-radius: 0rem 0px;
+    --bs-btn-border-color: var(--lavender-dark);
+    --bs-btn-bg: white;
+}
+
+.secondary-button {
+    --bs-btn-hover-bg: gold;
+    --bs-btn-active-bg: gold;
+    --bs-btn-hover-border-color: gold;
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--red) !important;
+    --bs-btn-hover-bg: var(--red);
+    --bs-btn-active-bg: var(--red);
+}
+
+.success-btn {
+    --bs-btn-color: var(--green);
+    border-color: var(--green);
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: var(--green);
+}
+
+.enable-facial-icon {
+    color: var(--lavender-dark);
+    background-color: var(--lavender-light);
+}
+
+.btn-social-media {
+    font-size: 18px;
+}
+
+.social-media-icon {
+    width: 25px;
+    font-size: 25px;
+}
+
+.Account-Management-btn {
+    --bs-btn-color: black;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: #f4e9fd;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: black;
+    --bs-btn-active-bg: #f4e9fd;
+    --bs-btn-active-border-color: #f4e9fd;
+}
+
+.personal-information {
+    border-color: var(--lavender);
+}
+
+.Design-radio {
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-padding-y: 0.375rem;
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+    font-size: 20px;
+}
+
+.setting-radio-button > input[type="radio"] {
+    border-color: var(--lavender);
+}
+
+.fa-calendar {
+    color: var(--lavender);
+}
+
+.vDateField {
+    border-color: var(--lavender);
+}
+
+.settings-list-title {
+    color: var(--lavender-dark);
+}
+
+.settings-list {
+    color: var(--lavender-dark);
+    border-color: transparent;
+    background-color: transparent;
+    font-size: x-large;
+    text-align: left;
+    --bs-btn-hover-bg: rgb(255, 70, 245);
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-bg: #ff46f5;
+    --bs-btn-active-border-color: white;
+}
+
+.contacts-icon-style {
+    color: var(--lavender-dark);
+    background-color: white;
+    padding: 10px;
+    font-size: 40px;
+}
+
+.contacts-title-style {
+    color: #462169;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.nav, .navbar-nav, .navbar-nav .nav-link.active {
+    --bs-navbar-hover-color: white;
+    --bs-nav-link-hover-color: white;
+    color: white;
+}
+
+.nav-link {
+    color: rgb(255 255 255 / 65%);
+}
+
+footer {
+    color: white
+}
+
+.setting-nav {
+    background-image: url('/static/images/lavender_love/PhasesUpD.png');
+    background-color: var(--lavender-dark);
+    height: 474px;
+    border-color: var(--lavender);
+    background-position: 0px -170px;
+    background-size: 900%;
+    background-blend-mode: color-dodge;
+}
+
+.button-close-modal-icon {
+    color: black;
+}
+
+#mic-btn {
+    --bs-btn-border-radius: 0rem 0px;
+    --bs-btn-border-color: var(--lavender);
+}
+
+#copy-to-clipboard {
+    --bs-btn-border-radius: 0rem 0px;
+    --bs-btn-border-color: var(--lavender);
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--red) !important;
+    --bs-btn-hover-bg: var(--red);
+    --bs-btn-active-bg: var(--red);
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.get-inspired-title {
+    color: var(--lavender-dark);
+}
+
+input::file-selector-button {
+    background-color: var(--lavender-light);
+    color: var(--lavender-dark);
+    border-color: var(--lavender);
+}
+
+.dot {
+    height: 1600px;
+    width: 2200px;
+    background-color: #e5cafd;
+    top: -987px;
+    right: -1100px;
+    --bs-border-width: 7px;
+    --bs-border-color: #ff94ff;
+    z-index: -1;
+}
+
+.circle-image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    text-align: center;
+    color: black;
+    font-size: larger;
+}
+
+.secondary-circle {
+    background: #e5cafd;
+    --bs-border-color: #ff94ff;
+    --bs-border-width: 7px;
+}
+
+.contacts-text {
+    color: #462169;
+}
+
+/* Dark */
+[data-bs-theme="dark"] {
+
+    .dot {
+        background-color: #3f1c54 !important;
+    }
+
+    .secondary-circle {
+        background-color: #3f1c54 !important;
+    }
+
+    .contacts-title-style {
+        color: var(--lavender);
+    }
+
+    .contacts-text {
+        color: var(--lavender);
+    }
+
+    .secondary-circle .h4 {
+        color: var(--lavender)!important;
+    }
+
+    .bg-body {
+        background-color: #2f153d !important;
+    }
+
+    .form-control {
+        background-color: #3f1c53;
+        border-color: var(--lavender);
+    }
+
+    .secondary-button {
+        color: white;
+    }
+
+    .secondary-button:hover {
+        color: black;
+    }
+
+    .main-btn:before {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    .secondary-btn:before {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    .main-btn, .secondary-btn, .btn-outline-primary {
+        --bs-btn-color: white;
+    }
+
+    .title-style {
+        -webkit-text-stroke: 1px var(--lavender);
+        color: white;
+    }
+
+    .button-close-modal-icon {
+        color: white;
+    }
+
+    #mic-btn {
+        --bs-btn-border-radius: 0rem 0px;
+        --bs-btn-border-color: var(--lavender);
+        --bs-btn-bg: #271134;
+    }
+
+    #copy-to-clipboard {
+        --bs-btn-border-radius: 0rem 0px;
+        --bs-btn-border-color: var(--lavender);
+        --bs-btn-bg: #271134;
+    }
+
+    .get-inspired-title {
+        color: var(--lavender-light);
+    }
+
+    input[type="checkbox"] {
+        border-color: var(--lavender);
+        background-color: var(--lavender-dark);
+    }
+
+}

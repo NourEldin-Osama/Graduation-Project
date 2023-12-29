@@ -1,4 +1,13 @@
 {% extends 'layouts/base.html' %}
+{% block head %}
+    {% if request.COOKIES.design_mode == "Lavender_Love" %}
+        <style>
+            .main-container {
+                background-size: 110% !important;
+            }
+        </style>
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -22,7 +31,8 @@
                                                            autocomplete="given-name"
                                                            class="form-control" style="height: 45px"
                                                            placeholder="First Name" autofocus required>
-                                                    <label for="first_name" style="font-size: 16px;top:-7px; left:-7px;">
+                                                    <label for="first_name"
+                                                           style="font-size: 16px;top:-7px; left:-7px;">
                                                         First Name
                                                     </label>
                                                 </div>
@@ -81,7 +91,8 @@
                                                            autocomplete="new-password"
                                                            class="form-control" style="height: 45px"
                                                            placeholder="Confirm Password" required>
-                                                    <label for="confirm_password" style="font-size: 16px;top:-7px; left:-7px;">
+                                                    <label for="confirm_password"
+                                                           style="font-size: 16px;top:-7px; left:-7px;">
                                                         Confirm Password
                                                     </label>
                                                 </div>
@@ -94,7 +105,8 @@
                                                            autocomplete="tel"
                                                            class="form-control" style="height: 45px"
                                                            placeholder="Phone Number" required>
-                                                    <label for="phone_number" style="font-size: 16px;top:-7px; left:-7px;">
+                                                    <label for="phone_number"
+                                                           style="font-size: 16px;top:-7px; left:-7px;">
                                                         Phone Number
                                                     </label>
                                                 </div>
@@ -110,7 +122,7 @@
                                                             Male
                                                         </label>
                                                     </div>
-                                                <div class="form-check form-check-inline setting-radio-button">
+                                                    <div class="form-check form-check-inline setting-radio-button">
                                                         <input id="Female" name="gender" type="radio"
                                                                value="F"
                                                                class="form-check-input">
@@ -160,7 +172,7 @@
                                                            autocomplete="bday"
                                                            class="vDateField" size="10"
                                                            placeholder="Birthdate" required>
-                                                <div class="input-group-text personal-information">
+                                                    <div class="input-group-text personal-information">
                                                         <label class="fas fa-calendar"></label>
                                                     </div>
                                                 </div>
@@ -171,10 +183,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                            <div class="form-check checkbox-button">
-                                                <input id="exampleCheckbox" type="checkbox"
-                                                       value=""
-                                                       class="form-check-input">
+                                                <div class="form-check checkbox-button">
+                                                    <input id="exampleCheckbox" type="checkbox"
+                                                           value=""
+                                                           class="form-check-input">
                                                     <label class="form-check-label" for="exampleCheckbox">
                                                         I agree to the
                                                         <a href="#" class="text-center" style="color: #3379E1;"

@@ -58,7 +58,7 @@
                     <li class="nav-item col-6 col-xl-auto">
                         <a class="nav-link py-2 px-0 px-xl-2 {% active request.path "video_generation" %}"
                            href="{% url "video_generation" %}">
-                            <i class='fa fa-video icon-style'></i> Video Conversion
+                            <i class='fa fa-video icon-style'></i> Character Transformation
                         </a>
                     </li>
                     <li class="nav-item col-6 col-xl-auto">
@@ -89,12 +89,14 @@
                                 {{ user.get_username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end end-0" style="--bs-dropdown-min-width: 8.5rem;">
+                                {% comment %}
                                 <li>
                                     <a class="dropdown-item {% active request.path "profile" %}"
                                        href="{% url "profile" %}">
                                         <i class='fa fa-user icon-style'></i> Profile
                                     </a>
                                 </li>
+                                {% endcomment %}
                                 <li>
                                     <a class="dropdown-item {% active_in request.path "settings" %}"
                                        href="{% url "settings" %}">

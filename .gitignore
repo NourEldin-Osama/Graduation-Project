@@ -4,9 +4,12 @@
 /media/*
 !/media/presentation_files/
 /media/presentation_files/*
+!/media/characters/
+/media/characters/*
 **/migrations/*
 !**/migrations/__init__.py
 /static/fonts
 /static/scss
 /venv
 .env
+!**/.gitkeep
